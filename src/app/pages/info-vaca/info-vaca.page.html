@@ -46,7 +46,7 @@
     <ion-item>
       <ion-label>
         Nombre del padre:
-        <ng-container *ngIf="animal.idPadre; else noLink">
+        <ng-container *ngIf="animal.idPadre; else noLinkPadre">
           <a [routerLink]="['/info-vaca', animal.idPadre]"
             >{{ animal.nombrePadre }}</a
           >
@@ -55,7 +55,7 @@
             >{{ animal.numeroPadre }}</a
           >
         </ng-container>
-        <ng-template #noLink
+        <ng-template #noLinkPadre
           >{{ animal.nombrePadre }} - No. {{ animal.numeroPadre }}</ng-template
         >
       </ion-label>
@@ -63,7 +63,7 @@
     <ion-item>
       <ion-label>
         Nombre de la madre:
-        <ng-container *ngIf="animal.idMadre; else noLink">
+        <ng-container *ngIf="animal.idMadre; else noLinkMadre">
           <a [routerLink]="['/info-vaca', animal.idMadre]"
             >{{ animal.nombreMadre }}</a
           >
@@ -72,7 +72,7 @@
             >{{ animal.numeroMadre }}</a
           >
         </ng-container>
-        <ng-template #noLink
+        <ng-template #noLinkMadre
           >{{ animal.nombreMadre }} - No. {{ animal.numeroMadre }}</ng-template
         >
       </ion-label>
