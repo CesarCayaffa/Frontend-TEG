@@ -16,7 +16,15 @@
 
   <!-- Info basica -->
   <ion-list>
-    <ion-list-header>Info de Basica:</ion-list-header>
+    <ion-list-header style="display: flex; justify-content: space-between; align-items: center;">
+      <p style="flex: 1;">Informacion de Basica:</p>
+      <div>
+        <img *ngIf="animal.estado === 'Vendida'" src="../../../assets/svg/sell.svg" />
+        <img *ngIf="animal.estado === 'Muerta'" src="../../../assets/svg/dead.svg" />
+        <img *ngIf="animal.estado === 'Desaparecida'" src="../../../assets/svg/thief.svg" />
+      </div>
+    </ion-list-header>
+
     <ion-item>
       <ion-label>Nombre: {{ animal.nombre }}</ion-label>
     </ion-item>
@@ -91,9 +99,9 @@
       >
     </ion-item> -->
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>Estado: {{ animal.estado }}</ion-label>
-    </ion-item>
+    </ion-item> -->
 
     <ion-item *ngIf="animal.esMadre && animal.edadPrimerParto > 0">
       <ion-label
@@ -101,9 +109,6 @@
       >
     </ion-item>
 
-    <!-- <ion-item>
-      <ion-label>Edad al primer parto: {{ animal.edadPrimerParto }}</ion-label>
-    </ion-item> -->
 
     <!-- <ion-item>
       <ion-label>Esta animal tiene hijos? {{ animal.esMadre ? 'Si' : 'No' }}</ion-label>

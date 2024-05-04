@@ -20,7 +20,8 @@ export class ActualizarVacaPage implements OnInit {
     nombrePadre: '',
     numeroPadre: null,
     nombreMadre: '',
-    numeroMadre: null
+    numeroMadre: null,
+    estado: '',
   };
 
   
