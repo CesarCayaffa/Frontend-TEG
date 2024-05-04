@@ -30,6 +30,11 @@ export class InfoVacaPage implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getAnimalById(this.id).subscribe((animal) => {
       this.animal = animal;
+      this.animal.hijos.forEach((id: any) => { 
+        this.getAnimalById(id).subscribe((hijo) => {
+          this.animal.hijos[this.animal.hijos.indexOf(id)] = hijo;
+        });
+      });
     });
   }
 
