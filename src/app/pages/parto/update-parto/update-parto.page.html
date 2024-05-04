@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="redirectInfoVaca()" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Parto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Editar parto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="updateParto()">
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Parto</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="comiParto.fechaParto" name="fechaParto"
+        required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Sexo del Becerro</ion-label>
+      <ion-select [(ngModel)]="comiParto.sexoBecerro" name="sexoBecerro" required>
+        <ion-select-option value="Masculino">Masculino</ion-select-option>
+        <ion-select-option value="Femenino">Femenino</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Peso del Becerro (Kg)</ion-label>
+      <ion-input type="number" [(ngModel)]="comiParto.pesoBecerroKg" name="pesoBecerroKg" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Día de Producción</ion-label>
+      <ion-input type="number" [(ngModel)]="comiParto.diaProduccion" name="diaProduccion" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Producción Total</ion-label>
+      <ion-input type="number" [(ngModel)]="comiParto.produccionTotal" name="produccionTotal" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Producción X</ion-label>
+      <ion-input type="number" [(ngModel)]="comiParto.produccionX" name="produccionX" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Observaciones</ion-label>
+      <ion-textarea [(ngModel)]="comiParto.observacion" name="observacion"></ion-textarea>
+    </ion-item>
+
+    <ion-button class="form-button" type="submit">Actualizar Parto</ion-button>
+  </form>
+
+
+</ion-content>

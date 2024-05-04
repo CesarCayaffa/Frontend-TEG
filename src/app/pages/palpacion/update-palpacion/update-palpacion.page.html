@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="redirectInfoVaca()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Palpacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Editar Palpacion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="updatePalpacion()">
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Celo</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="palpacion.fechaCelo" name="fechaCelo"
+        required></ion-datetime>
+
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Servicio</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="palpacion.fechaServicio" name="fechaServicio"
+        required></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="floating">Toro</ion-label>
+      <ion-input [(ngModel)]="palpacion.toro" name="toro" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Palpacion 1</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="palpacion.fechaPalpacion1" name="fechaPalpacion1"
+        required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Diagnostico 1</ion-label>
+      <ion-select [(ngModel)]="palpacion.diagnostico1" name="diagnostico1" required>>
+        <ion-select-option value="Preñada">Preñada</ion-select-option>
+        <ion-select-option value="Vacia">Vacia</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Palpacion 2</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="palpacion.fechaPalpacion2" name="fechaPalpacion2"
+        required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Diagnostico 2</ion-label>
+      <ion-select [(ngModel)]="palpacion.diagnostico2" name="diagnostico2" required>>
+        <ion-select-option value="Preñada">Preñada</ion-select-option>
+        <ion-select-option value="Vacia">Vacia</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Observaciones</ion-label>
+      <ion-textarea [(ngModel)]="palpacion.observaciones" name="observaciones"></ion-textarea>
+    </ion-item>
+
+    <ion-button class="form-button" type="submit">Actualizar Palpacion</ion-button>
+  </form>
+
+</ion-content>

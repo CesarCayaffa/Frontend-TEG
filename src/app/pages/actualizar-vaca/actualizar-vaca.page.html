@@ -1,0 +1,101 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="redirectToInfoVaca()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar Vaca/Toro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Actualizar Vaca/Toro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="updateAnimal()">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="animal.nombre" name="nombre" required></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Numero</ion-label>
+          <ion-input [(ngModel)]="animal.numero" name="numero" type="number" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Raza</ion-label>
+          <ion-input [(ngModel)]="animal.raza" name="raza" required></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Sexo</ion-label>
+          <ion-select [(ngModel)]="animal.sexo" name="sexo" required>
+            <ion-select-option value="Masculino">Masculino</ion-select-option>
+            <ion-select-option value="Femenino">Femenino</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="animal.fechaNacimiento" name="fechaNacimiento"
+        required></ion-datetime>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Es Joven?</ion-label>
+          <ion-checkbox [(ngModel)]="animal.esBecerro" name="esBecerro"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Nombre Padre</ion-label>
+          <ion-input [(ngModel)]="animal.nombrePadre" name="nombrePadre"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Numero Padre</ion-label>
+          <ion-input [(ngModel)]="animal.numeroPadre" name="numeroPadre" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Nombre Madre</ion-label>
+          <ion-input [(ngModel)]="animal.nombreMadre" name="nombreMadre"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Numero Madre</ion-label>
+          <ion-input [(ngModel)]="animal.numeroMadre" name="numeroMadre" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button class="form-button" type="submit">Actualizar</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="form-button" color="danger" (click)="redirectToInfoVaca()">Cancelar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

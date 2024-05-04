@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  ion-header {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-title {
+    font-weight: bold;
+  }
+  
+  form {
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-item {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .form-button {
+    background-color: #007bff;
+    color: #ffffff;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  ion-label {
+    color: #333333;
+  }
+  
+  ion-row {
+    display: flex;
+    justify-content: center;
+  }
+  

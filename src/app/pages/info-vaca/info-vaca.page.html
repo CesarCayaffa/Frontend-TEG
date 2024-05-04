@@ -1,0 +1,347 @@
+<ion-header *ngIf="animal">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="redirectList()"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large"
+      >Informacion de {{ animal.nombre }} No.{{ animal.numero}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="animal">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Info basica -->
+  <ion-list>
+    <ion-list-header>Info de Basica:</ion-list-header>
+    <ion-item>
+      <ion-label>Nombre: {{ animal.nombre }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Numero: {{ animal.numero}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label
+        >Fecha de nacimiento: {{ animal.fechaNacimiento | date:'dd-MM-yyyy'
+        }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexo: {{ animal.sexo }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Raza: {{ animal.raza }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <!-- <ion-label>Edad: {{ animal.edad}} año(s)</ion-label>
+      <ion-label>dias -> {{animal.edad.days}}</ion-label> -->
+      <ion-label
+        >Edad: {{ animal.edad.years }} años, {{ animal.edad.months }} meses, {{
+        animal.edad.days }} días</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Nombre del padre:
+        <ng-container *ngIf="animal.idPadre; else noLink">
+          <a [routerLink]="['/info-vaca', animal.idPadre]"
+            >{{ animal.nombrePadre }}</a
+          >
+          - No.
+          <a [routerLink]="['/info-vaca', animal.idPadre]"
+            >{{ animal.numeroPadre }}</a
+          >
+        </ng-container>
+        <ng-template #noLink
+          >{{ animal.nombrePadre }} - No. {{ animal.numeroPadre }}</ng-template
+        >
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Nombre de la madre:
+        <ng-container *ngIf="animal.idMadre; else noLink">
+          <a [routerLink]="['/info-vaca', animal.idMadre]"
+            >{{ animal.nombreMadre }}</a
+          >
+          - No.
+          <a [routerLink]="['/info-vaca', animal.idMadre]"
+            >{{ animal.numeroMadre }}</a
+          >
+        </ng-container>
+        <ng-template #noLink
+          >{{ animal.nombreMadre }} - No. {{ animal.numeroMadre }}</ng-template
+        >
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Etapa: {{ animal.esBecerro ? 'Joven' : 'Adulta' }}</ion-label>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>esBecerro -> {{ animal.esBecerro }}</ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item>
+      <ion-label
+        >Esta animal es Madre? {{ animal.esMadre ? 'Si' : 'No' }}</ion-label
+      >
+    </ion-item> -->
+
+    <ion-item *ngIf="animal.esMadre && animal.edadPrimerParto > 0">
+      <ion-label
+        >Edad al primer parto: {{ animal.edadPrimerParto }} año(s)</ion-label
+      >
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>Edad al primer parto: {{ animal.edadPrimerParto }}</ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item>
+      <ion-label>Esta animal tiene hijos? {{ animal.esMadre ? 'Si' : 'No' }}</ion-label>
+    </ion-item> -->
+  </ion-list>
+
+  <!-- Palpaciones -->
+  <div>
+    <ion-item
+      *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
+      (click)="showPalpacion = !showPalpacion"
+    >
+      Info de Palpaciones
+      <ion-icon
+        slot="end"
+        [name]="showPalpacion ? 'chevron-up-outline' : 'chevron-down-outline'"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-list
+      *ngIf="showPalpacion && !animal.esBecerro && animal.sexo === 'Femenino'"
+    >
+      <!-- <ion-list-header>Info de Palpaciones:</ion-list-header> -->
+      <ion-grid>
+        <ion-row>
+          <ion-col>Fecha de celo</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.fechaCelo | date:'dd-MM-yyyy'}}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Fecha de servicio</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.fechaServicio | date:'dd-MM-yyyy'}}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Toro</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.toro }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Fecha de palpación</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.fechaPalpacion1 | date:'dd-MM-yyyy' }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Diagnóstico</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.diagnostico1 }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Fecha de palpación</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.fechaPalpacion2 | date:'dd-MM-yyyy' }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Diagnóstico</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.diagnostico2 }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Observaciones</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones"
+            >{{ palpacion.observaciones }}</ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>Acciones</ion-col>
+          <ion-col *ngFor="let palpacion of animal.palpaciones">
+            <ion-button
+              color="primary"
+              (click)="updatePalpacion(palpacion._id)"
+            >
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="deletePalpacion(palpacion._id)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button expand="full" (click)="addPalpacion(animal.id)">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Agregar Palpación
+      </ion-button>
+    </ion-list>
+  </div>
+
+  <!-- ComiParto -->
+  <ion-item
+    *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
+    (click)="showParto = !showParto"
+  >
+    Info de Parto
+    <ion-icon
+      slot="end"
+      [name]="showParto ? 'chevron-up-outline' : 'chevron-down-outline'"
+    ></ion-icon>
+  </ion-item>
+
+  <ion-list
+    *ngIf="showParto && !animal.esBecerro && animal.sexo === 'Femenino'"
+  >
+    <!-- <ion-list-header>Info de Parto:</ion-list-header> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>Fecha de parto</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.fechaParto | date:'dd-MM-yyyy'}}</ion-col
+        >
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>intervalo entre partos</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.intervaloParto }}</ion-col
+        >
+      </ion-row> -->
+      <ion-row>
+        <ion-col>Sexo del becerro</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.sexoBecerro }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Peso del becerro (Kg)</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.pesoBecerroKg }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Día de producción</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.diaProduccion }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Producción total</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.produccionTotal }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Producción X</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.produccionX }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Observación</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.observacion }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Acciones</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto">
+          <ion-button color="primary" (click)="updateParto(comiParto._id)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" (click)="deleteParto(comiParto._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="full" (click)="addParto(animal.id)">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Agregar Parto
+    </ion-button>
+  </ion-list>
+
+  <!-- LecheMes -->
+  <ion-item
+    *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
+    (click)="showLecheMes = !showLecheMes"
+  >
+    Info de Leche por Mes
+    <ion-icon
+      slot="end"
+      [name]="showLecheMes ? 'chevron-up-outline' : 'chevron-down-outline'"
+    ></ion-icon>
+  </ion-item>
+
+  <ion-list
+    *ngIf="showLecheMes && !animal.esBecerro && animal.sexo === 'Femenino'"
+  >
+    <!-- <ion-list-header>Info de Leche por Mes:</ion-list-header> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>Mes</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.mes }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Cantidad de leche</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.cantidadLeche }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Fecha de secado</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Acciones</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes">
+          <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" (click)="deleteLecheMes(lecheMes._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="full" (click)="addLecheMes(animal.id)">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Agregar Leche por Mes
+    </ion-button>
+  </ion-list>
+
+  <!-- Botones de accion -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button size="small">
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary" (click)="updateAnimal()">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger" (click)="deleteAnimal(animal.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

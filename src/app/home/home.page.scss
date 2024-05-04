@@ -1,0 +1,41 @@
+  
+  ion-title {
+    font-weight: bold;
+  }
+  
+  
+  ion-item {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  ion-button {
+    background-color: #007bff;
+    color: #ffffff;
+    margin: 10px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  ion-label {
+    color: #333333;
+  }
+  
+
+  
+  form {
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin: 10px auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }

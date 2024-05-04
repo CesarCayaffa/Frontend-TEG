@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-menu></app-menu>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Hola, {{username}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Edad a que una vaca/toro se convierte en adulta: (default: {{ animal.edadBecerro }})</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <!-- <ion-item>
+    <ion-label>Modo oscuro</ion-label>
+    <ion-toggle [(ngModel)]="darkMode" (ionChange)="toggleTheme()"></ion-toggle>
+  </ion-item> -->
+
+  <ion-button expand="full" (click)="logout()">Cerrar sesión</ion-button>
+</ion-content>

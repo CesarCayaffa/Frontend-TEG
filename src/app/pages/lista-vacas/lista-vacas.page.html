@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Lista de las Vacas y Toros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Lista de las Vacas y Toros</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-menu></app-menu>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar
+          [(ngModel)]="searchTerm"
+          (ionInput)="filterAnimals()"
+          placeholder="Buscar por nombre o número"
+        ></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>Sexo</ion-label>
+          <ion-select [(ngModel)]="filterSexo" (ionChange)="filterAnimals()">
+            <ion-select-option value="">Todos</ion-select-option>
+            <ion-select-option value="Masculino">Masculino</ion-select-option>
+            <ion-select-option value="Femenino">Femenino</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>Etapa</ion-label>
+          <ion-select [(ngModel)]="filterEtapa" (ionChange)="filterAnimals()">
+            <ion-select-option value="">Todos</ion-select-option>
+            <ion-select-option value="true">Joven</ion-select-option>
+            <ion-select-option value="false">Adulto</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" fill="outline" (click)="clearFilters()"
+          >Limpiar filtros</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let animal of filteredAnimals">
+      <a [routerLink]="['/info-vaca', animal.id]">
+        <div class="avatar">
+          <img
+            class="svg-big"
+            [src]="animal.sexo === 'Masculino' ? '../../../assets/svg/bull.svg' : '../../../assets/svg/cow.svg'"
+          />
+          <img
+            class="svg-small"
+            *ngIf="animal.esBecerro"
+            src="../../../assets/svg/calf.svg"
+          />
+        </div>
+      </a>
+      <a [routerLink]="['/info-vaca', animal.id]">
+        <ion-label>
+          <h2>Nombre: {{ animal.nombre }} No.{{ animal.numero }}</h2>
+          <p>Raza: {{ animal.raza }}</p>
+          <!-- <p>Sexo: {{animal.sexo }}</p> -->
+          <p>
+            Edad: {{ animal.years }} años ({{ animal.fechaNacimiento |
+            date:'dd-MM-yyyy'}})
+          </p>
+        </ion-label>
+      </a>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button size="small" [routerLink]="['/crear-vaca']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
