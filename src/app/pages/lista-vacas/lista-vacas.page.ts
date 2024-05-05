@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { RefresherEventDetail } from '@ionic/core';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista-vacas',
@@ -17,7 +18,11 @@ export class ListaVacasPage implements OnInit {
   filterSexo = '';
   filterEtapa = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private actionSheetController: ActionSheetController
+  ) {}
 
   ngOnInit() {
     this.getAnimals().subscribe((data) => {
@@ -84,5 +89,72 @@ export class ListaVacasPage implements OnInit {
     this.filterSexo = '';
     this.filterEtapa = '';
     this.filterAnimals();
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      subHeader: 'Filtrar por:',
+      buttons: [
+        {
+          text:
+            this.filterSexo === 'Masculino'
+              ? 'Sexo: Masculino ✔️'
+              : 'Sexo: Masculino',
+          handler: () => {
+            this.filterSexo = 'Masculino';
+            this.filterAnimals();
+          },
+        },
+        {
+          text:
+            this.filterSexo === 'Femenino'
+              ? 'Sexo: Femenino ✔️'
+              : 'Sexo: Femenino',
+          handler: () => {
+            this.filterSexo = 'Femenino';
+            this.filterAnimals();
+          },
+        },
+        {
+          text:
+            this.filterEtapa === 'true' ? 'Etapa: Joven ✔️' : 'Etapa: Joven',
+          handler: () => {
+            this.filterEtapa = 'true';
+            this.filterAnimals();
+          },
+        },
+        {
+          text:
+            this.filterEtapa === 'false' ? 'Etapa: Adulto ✔️' : 'Etapa: Adulto',
+          handler: () => {
+            this.filterEtapa = 'false';
+            this.filterAnimals();
+          },
+        },
+        {
+          text:'------------------------------------------------------------------------'
+        },
+        {
+          text: 'Quitar filtros',
+          role: 'destructive',
+          icon: 'close',
+          handler: () => {
+            this.clearFilters();
+          },
+        }, 
+        {
+          text: 'Refrescar página/datos',
+          icon: 'refresh',
+          handler: () => {
+            this.clearFilters();
+            this.doRefresh({
+              detail: { complete: function () {} },
+            } as CustomEvent<RefresherEventDetail>);
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 }
