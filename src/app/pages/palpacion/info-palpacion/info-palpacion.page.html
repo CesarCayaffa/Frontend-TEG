@@ -8,8 +8,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
+  <ion-button expand="full" (click)="addPalpacion(animal.id)">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Agregar Palpación
+  </ion-button>
 
-  <ion-list>
+  <ion-list *ngIf="animal?.palpaciones && animal.palpaciones.length > 0">
   <ion-list-header>Info de Palpaciones:</ion-list-header>
   <ion-grid>
     <ion-row>
@@ -75,11 +80,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-button expand="full" (click)="addPalpacion(animal.id)">
-    <ion-icon slot="start" name="add"></ion-icon>
-    Agregar Palpación
-  </ion-button>
+  
+</ion-list>
 
+<ion-list *ngIf="animal?.palpaciones && animal.palpaciones.length === 0">
+  <ion-list-header>Info de Palpaciones:</ion-list-header>
+  <ion-item>
+    <ion-label>No hay palpaciones registradas</ion-label>
+  </ion-item>
 </ion-list>
 
 </ion-content>
