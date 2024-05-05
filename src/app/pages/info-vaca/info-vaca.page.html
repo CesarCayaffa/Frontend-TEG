@@ -132,7 +132,6 @@
   </ion-list>
 
   <!-- Palpaciones -->
-  <div>
     <ion-item
       *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
       (click)="showPalpacion = !showPalpacion"
@@ -197,7 +196,7 @@
             >{{ palpacion.observaciones }}</ion-col
           >
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
           <ion-col>Acciones</ion-col>
           <ion-col *ngFor="let palpacion of animal.palpaciones">
             <ion-button
@@ -210,14 +209,20 @@
               <ion-icon name="trash"></ion-icon>
             </ion-button>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-grid>
-      <ion-button expand="full" (click)="addPalpacion(animal.id)">
+      <!-- <ion-button expand="full" (click)="addPalpacion(animal.id)">
         <ion-icon slot="start" name="add"></ion-icon>
         Agregar Palpación
-      </ion-button>
+      </ion-button> -->
+
+          <!-- Botón para expandir -->
+    <ion-button expand="full" (click)="masInfoPalpacion()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Expandir
+    </ion-button>
     </ion-list>
-  </div>
+
 
   <!-- ComiParto -->
   <ion-item

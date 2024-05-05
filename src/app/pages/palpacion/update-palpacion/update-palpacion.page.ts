@@ -53,7 +53,7 @@ export class UpdatePalpacionPage implements OnInit {
   }
 
   redirectInfoVaca() {
-    this.router.navigate(['/info-vaca', this.animalId]);
+    this.router.navigate(['/info-palpacion', this.animalId]);
 
   }
 

@@ -30,7 +30,7 @@ export class InfoVacaPage implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getAnimalById(this.id).subscribe((animal) => {
       this.animal = animal;
-      this.animal.hijos.forEach((id: any) => { 
+      this.animal.hijos.forEach((id: any) => {
         this.getAnimalById(id).subscribe((hijo) => {
           this.animal.hijos[this.animal.hijos.indexOf(id)] = hijo;
         });
@@ -85,6 +85,12 @@ export class InfoVacaPage implements OnInit {
   }
 
   //Palpacion
+  masInfoPalpacion() {
+    this.router.navigate(['/info-palpacion/', this.id]);
+
+   
+  }
+
   addPalpacion(id: string) {
     this.router.navigate(['/add-palpacion', this.id]);
   }

@@ -44,7 +44,6 @@ body {
   ion-row {
     display: flex;
     flex-direction: row;
-
   }
   
   ion-col {
@@ -53,10 +52,10 @@ body {
     justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
-    min-width: 120px;
+    min-width: 150px;
     padding: 10px;
-    width: 150px;
-
+    height: 60px;
+    max-height: 100px;
   }
 
   div {

@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'info-palpacion/:animalId',
+    loadChildren: () => import('./pages/palpacion/info-palpacion/info-palpacion.module').then( m => m.InfoPalpacionPageModule)
+  },
 ];
 
 @NgModule({

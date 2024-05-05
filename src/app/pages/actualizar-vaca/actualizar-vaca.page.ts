@@ -24,9 +24,11 @@ export class ActualizarVacaPage implements OnInit {
     estado: '',
   };
 
-  
-
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -41,7 +43,7 @@ export class ActualizarVacaPage implements OnInit {
     const url = `https://backend-teg.up.railway.app/animals/${id}`;
     this.http.get(url).subscribe((animal: any) => {
       this.animal = animal;
-      this.animal.id = id; 
+      this.animal.id = id;
     });
   }
 
@@ -55,7 +57,4 @@ export class ActualizarVacaPage implements OnInit {
   redirectToInfoVaca() {
     this.router.navigate(['/info-vaca', this.animal.id]);
   }
-
-
-
 }

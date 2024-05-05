@@ -39,7 +39,7 @@ export class AddPalpacionPage implements OnInit {
 
 
   redirectInfoVaca() {
-    this.router.navigate(['/info-vaca', this.route.snapshot.paramMap.get('id')]);
+    this.router.navigate(['/info-palpacion', this.route.snapshot.paramMap.get('id')]);
   }
 
 
