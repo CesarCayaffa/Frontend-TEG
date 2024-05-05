@@ -73,4 +73,8 @@ export class InfoPalpacionPage implements OnInit {
         alert.present();
       });
   }
+
+  retroceder() {
+    this.router.navigate(['/info-vaca', this.animalId]);
+  }
 }

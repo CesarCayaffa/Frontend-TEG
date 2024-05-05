@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/info-vaca/{{animalId}}"></ion-back-button>
+      <ion-back-button (click)="retroceder()"></ion-back-button>
     </ion-buttons>
     <ion-title>Info de Palpacion de {{ animal?.nombre }}</ion-title>
   </ion-toolbar>
