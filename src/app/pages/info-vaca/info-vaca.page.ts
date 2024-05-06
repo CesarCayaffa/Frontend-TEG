@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RefresherEventDetail } from '@ionic/core';
 import { AlertController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component'
 
 @Component({
   selector: 'app-info-vaca',
@@ -23,7 +25,8 @@ export class InfoVacaPage implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private popoverController: PopoverController
   ) {}
 
   ngOnInit() {
@@ -87,11 +90,13 @@ export class InfoVacaPage implements OnInit {
   //Palpacion
   masInfoPalpacion() {
     this.router.navigate(['/info-palpacion/', this.id]);
+    this.popoverController.dismiss();
   }
 
   //Parto
   masInfoParto(){
     this.router.navigate(['/info-parto/', this.id]);
+    this.popoverController.dismiss();
   }
 
 
@@ -99,5 +104,22 @@ export class InfoVacaPage implements OnInit {
   //LecheMes
   masInfoLecheMes(){
     this.router.navigate(['/info-mes-leche/', this.id]);
+    this.popoverController.dismiss();
+  }
+
+  //Popover
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopOverInfoComponent, 
+      event: ev,
+      translucent: true,
+      componentProps: { 
+        id: this.id,
+        masInfoPalpacion: this.masInfoPalpacion.bind(this),
+        masInfoParto: this.masInfoParto.bind(this),
+        masInfoLecheMes: this.masInfoLecheMes.bind(this)
+      }
+    });
+    return await popover.present();
   }
 }

@@ -9,10 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { PopOverInfoComponent } from './components/pop-over-info/pop-over-info.component';
+
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PopOverInfoComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

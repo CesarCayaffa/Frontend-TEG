@@ -6,7 +6,13 @@
     <ion-title size="large"
       >Informacion de {{ animal.nombre }} No.{{ animal.numero}}</ion-title
     >
-  
+
+  <ion-buttons slot="end">
+    <ion-button (click)="presentPopover($event)">
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
