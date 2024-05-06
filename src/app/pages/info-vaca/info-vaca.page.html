@@ -7,12 +7,15 @@
       >Informacion de {{ animal.nombre }} No.{{ animal.numero}}</ion-title
     >
 
-  <ion-buttons slot="end">
-    <ion-button (click)="presentPopover($event)">
-      <ion-icon name="ellipsis-vertical"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="animal.sexo === 'Femenino' && !animal.esBecerro"
+        (click)="presentPopover($event)"
+      >
+        <!-- <ion-icon name="ellipsis-vertical"></ion-icon> -->
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -23,12 +26,23 @@
 
   <!-- Info basica -->
   <ion-list>
-    <ion-list-header style="display: flex; justify-content: space-between; align-items: center;">
-      <p style="flex: 1;">Informacion de Basica:</p>
+    <ion-list-header
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <p style="flex: 1">Informacion de Basica:</p>
       <div>
-        <img *ngIf="animal.estado === 'Vendida'" src="../../../assets/svg/sell.svg" />
-        <img *ngIf="animal.estado === 'Muerta'" src="../../../assets/svg/dead.svg" />
-        <img *ngIf="animal.estado === 'Desaparecida'" src="../../../assets/svg/thief.svg" />
+        <img
+          *ngIf="animal.estado === 'Vendida'"
+          src="../../../assets/svg/sell.svg"
+        />
+        <img
+          *ngIf="animal.estado === 'Muerta'"
+          src="../../../assets/svg/dead.svg"
+        />
+        <img
+          *ngIf="animal.estado === 'Desaparecida'"
+          src="../../../assets/svg/thief.svg"
+        />
       </div>
     </ion-list-header>
 
@@ -116,7 +130,6 @@
       >
     </ion-item>
 
-
     <!-- <ion-item>
       <ion-label>Esta animal tiene hijos? {{ animal.esMadre ? 'Si' : 'No' }}</ion-label>
     </ion-item> -->
@@ -139,7 +152,7 @@
   </ion-list>
 
   <!-- Palpaciones -->
-    <!-- <ion-item
+  <!-- <ion-item
       *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
       (click)="showPalpacion = !showPalpacion"
     >
