@@ -46,7 +46,7 @@ export class UpdateMesLechePage implements OnInit {
   }
 
   redirectInfoVaca() {
-    this.router.navigate(['/info-vaca', this.animalId]);
+    this.router.navigate(['/info-mes-leche', this.animalId]);
 
   }
 

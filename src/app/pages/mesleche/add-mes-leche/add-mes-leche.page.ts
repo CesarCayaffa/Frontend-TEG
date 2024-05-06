@@ -33,7 +33,7 @@ export class AddMesLechePage implements OnInit {
   }
 
   redirecInfoVaca() {
-    this.router.navigate(['/info-vaca', this.route.snapshot.paramMap.get('id')]);
+    this.router.navigate(['/info-mes-leche', this.route.snapshot.paramMap.get('id')]);
   }
 
   toggleCalendar() {
