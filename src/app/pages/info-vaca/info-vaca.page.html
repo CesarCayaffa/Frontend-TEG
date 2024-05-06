@@ -340,7 +340,7 @@
           >{{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-col
         >
       </ion-row>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>Acciones</ion-col>
         <ion-col *ngFor="let lecheMes of animal.lecheMes">
           <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
@@ -350,11 +350,15 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
-    <ion-button expand="full" (click)="addLecheMes(animal.id)">
+    <!-- <ion-button expand="full" (click)="addLecheMes(animal.id)">
       <ion-icon slot="start" name="add"></ion-icon>
       Agregar Leche por Mes
+    </ion-button> -->
+    <ion-button expand="full" (click)="masInfoLecheMes()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Expandir
     </ion-button>
   </ion-list>
 

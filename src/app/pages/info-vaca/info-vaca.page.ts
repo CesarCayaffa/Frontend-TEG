@@ -97,6 +97,10 @@ export class InfoVacaPage implements OnInit {
 
 
   //LecheMes
+  masInfoLecheMes(){
+    this.router.navigate(['/info-mes-leche/', this.id]);
+  }
+
   addLecheMes(id: string) {
     this.router.navigate(['/add-mes-leche', this.id]);
   }
