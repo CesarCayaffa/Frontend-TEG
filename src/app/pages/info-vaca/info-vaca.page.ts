@@ -101,38 +101,38 @@ export class InfoVacaPage implements OnInit {
     this.router.navigate(['/info-mes-leche/', this.id]);
   }
 
-  addLecheMes(id: string) {
-    this.router.navigate(['/add-mes-leche', this.id]);
-  }
-  updateLecheMes(mesLecheId: string) {
-    this.router.navigate(['/update-mes-leche', this.id, mesLecheId]);
-  }
-  deleteLecheMes(mesLecheId: string) {
-    this.alertController
-      .create({
-        // header: 'Eliminar',
-        message: '¿Estás seguro de que deseas eliminar este mes de leche?',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-          },
-          {
-            text: 'Eliminar',
-            handler: () => {
-              const url = `${this.baseUrl}/deleteLecheMes/${this.id}/${mesLecheId}`;
+  // addLecheMes(id: string) {
+  //   this.router.navigate(['/add-mes-leche', this.id]);
+  // }
+  // updateLecheMes(mesLecheId: string) {
+  //   this.router.navigate(['/update-mes-leche', this.id, mesLecheId]);
+  // }
+  // deleteLecheMes(mesLecheId: string) {
+  //   this.alertController
+  //     .create({
+  //       // header: 'Eliminar',
+  //       message: '¿Estás seguro de que deseas eliminar este mes de leche?',
+  //       buttons: [
+  //         {
+  //           text: 'Cancelar',
+  //           role: 'cancel',
+  //         },
+  //         {
+  //           text: 'Eliminar',
+  //           handler: () => {
+  //             const url = `${this.baseUrl}/deleteLecheMes/${this.id}/${mesLecheId}`;
 
-              this.http.patch(url, {}).subscribe(() => {
-                this.getAnimalById(this.id).subscribe((animal) => {
-                  this.animal = animal;
-                });
-              });
-            },
-          },
-        ],
-      })
-      .then((alert) => {
-        alert.present();
-      });
-  }
+  //             this.http.patch(url, {}).subscribe(() => {
+  //               this.getAnimalById(this.id).subscribe((animal) => {
+  //                 this.animal = animal;
+  //               });
+  //             });
+  //           },
+  //         },
+  //       ],
+  //     })
+  //     .then((alert) => {
+  //       alert.present();
+  //     });
+  // }
 }

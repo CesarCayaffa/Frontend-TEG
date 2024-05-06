@@ -1,13 +1,63 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>infoMesLeche</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="retroceder()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>info Lactancia de:
+      <span class="name"> {{ animal?.nombre }} </span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">infoMesLeche</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-button expand="full" (click)="addLecheMes(animal.id)">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Agregar Leche por Mes
+  </ion-button>
+  
+  <ion-list
+  *ngIf="animal?.lecheMes && animal.lecheMes.length > 0"
+  >
+    <ion-list-header>Info de Leche por Mes:</ion-list-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Mes</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.mes }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Cantidad de leche</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.cantidadLeche }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Fecha de secado</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes"
+          >{{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Acciones</ion-col>
+        <ion-col *ngFor="let lecheMes of animal.lecheMes">
+          <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" (click)="deleteLecheMes(lecheMes._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-list>
+
+  <ion-list *ngIf="!animal?.lecheMes || animal.lecheMes.length === 0">
+    <ion-list-header>Info de Leche por Mes:</ion-list-header>
+    <ion-item>
+      <ion-label>No hay información de leche por mes</ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
