@@ -139,7 +139,7 @@
   </ion-list>
 
   <!-- Palpaciones -->
-    <ion-item
+    <!-- <ion-item
       *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
       (click)="showPalpacion = !showPalpacion"
     >
@@ -153,7 +153,7 @@
     <ion-list
       *ngIf="showPalpacion && !animal.esBecerro && animal.sexo === 'Femenino'"
     >
-      <!-- <ion-list-header>Info de Palpaciones:</ion-list-header> -->
+      <ion-list-header>Info de Palpaciones:</ion-list-header>
       <ion-grid>
         <ion-row>
           <ion-col>Fecha de celo</ion-col>
@@ -203,7 +203,7 @@
             >{{ palpacion.observaciones }}</ion-col
           >
         </ion-row>
-        <!-- <ion-row>
+        <ion-row>
           <ion-col>Acciones</ion-col>
           <ion-col *ngFor="let palpacion of animal.palpaciones">
             <ion-button
@@ -216,23 +216,22 @@
               <ion-icon name="trash"></ion-icon>
             </ion-button>
           </ion-col>
-        </ion-row> -->
+        </ion-row>
       </ion-grid>
-      <!-- <ion-button expand="full" (click)="addPalpacion(animal.id)">
+      <ion-button expand="full" (click)="addPalpacion(animal.id)">
         <ion-icon slot="start" name="add"></ion-icon>
         Agregar Palpación
-      </ion-button> -->
+      </ion-button>
 
-          <!-- Botón para expandir -->
+          Botón para expandir
     <ion-button expand="full" (click)="masInfoPalpacion()">
       <ion-icon name="expand-outline"></ion-icon>
       Expandir
     </ion-button>
-    </ion-list>
-
+    </ion-list> -->
 
   <!-- ComiParto -->
-  <ion-item
+  <!-- <ion-item
     *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
     (click)="showParto = !showParto"
   >
@@ -246,7 +245,7 @@
   <ion-list
     *ngIf="showParto && !animal.esBecerro && animal.sexo === 'Femenino'"
   >
-    <!-- <ion-list-header>Info de Parto:</ion-list-header> -->
+    <ion-list-header>Info de Parto:</ion-list-header>
     <ion-grid>
       <ion-row>
         <ion-col>Fecha de parto</ion-col>
@@ -290,7 +289,7 @@
           >{{ comiParto.observacion }}</ion-col
         >
       </ion-row>
-      <!-- <ion-row>
+      <ion-row>
         <ion-col>Acciones</ion-col>
         <ion-col *ngFor="let comiParto of animal.comiParto">
           <ion-button color="primary" (click)="updateParto(comiParto._id)">
@@ -300,20 +299,20 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
     </ion-grid>
-    <!-- <ion-button expand="full" (click)="addParto(animal.id)">
+    <ion-button expand="full" (click)="addParto(animal.id)">
       <ion-icon slot="start" name="add"></ion-icon>
       Agregar Parto
-    </ion-button> -->
+    </ion-button>
     <ion-button expand="full" (click)="masInfoParto()">
       <ion-icon name="expand-outline"></ion-icon>
       Expandir
     </ion-button>
-  </ion-list>
+  </ion-list> -->
 
   <!-- LecheMes -->
-  <ion-item
+  <!-- <ion-item
     *ngIf="!animal.esBecerro && animal.sexo === 'Femenino'"
     (click)="showLecheMes = !showLecheMes"
   >
@@ -327,7 +326,7 @@
   <ion-list
     *ngIf="showLecheMes && !animal.esBecerro && animal.sexo === 'Femenino'"
   >
-    <!-- <ion-list-header>Info de Leche por Mes:</ion-list-header> -->
+    <ion-list-header>Info de Leche por Mes:</ion-list-header>
     <ion-grid>
       <ion-row>
         <ion-col>Mes</ion-col>
@@ -347,7 +346,7 @@
           >{{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-col
         >
       </ion-row>
-      <!-- <ion-row>
+      <ion-row>
         <ion-col>Acciones</ion-col>
         <ion-col *ngFor="let lecheMes of animal.lecheMes">
           <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
@@ -357,17 +356,17 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
     </ion-grid>
-    <!-- <ion-button expand="full" (click)="addLecheMes(animal.id)">
+    <ion-button expand="full" (click)="addLecheMes(animal.id)">
       <ion-icon slot="start" name="add"></ion-icon>
       Agregar Leche por Mes
-    </ion-button> -->
+    </ion-button>
     <ion-button expand="full" (click)="masInfoLecheMes()">
       <ion-icon name="expand-outline"></ion-icon>
       Expandir
     </ion-button>
-  </ion-list>
+  </ion-list> -->
 
   <!-- Botones de accion -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
