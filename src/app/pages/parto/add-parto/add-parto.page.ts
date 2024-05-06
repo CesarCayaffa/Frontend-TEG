@@ -37,7 +37,7 @@ export class AddPartoPage implements OnInit {
   }
 
   redirecInfoVaca() {
-    this.router.navigate(['/info-vaca', this.route.snapshot.paramMap.get('id')]);
+    this.router.navigate(['/info-parto', this.route.snapshot.paramMap.get('id')]);
   }
 
   toggleCalendar() {

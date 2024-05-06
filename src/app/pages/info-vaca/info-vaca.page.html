@@ -247,12 +247,6 @@
           >{{ comiParto.fechaParto | date:'dd-MM-yyyy'}}</ion-col
         >
       </ion-row>
-      <!-- <ion-row>
-        <ion-col>intervalo entre partos</ion-col>
-        <ion-col *ngFor="let comiParto of animal.comiParto"
-          >{{ comiParto.intervaloParto }}</ion-col
-        >
-      </ion-row> -->
       <ion-row>
         <ion-col>Sexo del becerro</ion-col>
         <ion-col *ngFor="let comiParto of animal.comiParto"
@@ -289,7 +283,7 @@
           >{{ comiParto.observacion }}</ion-col
         >
       </ion-row>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>Acciones</ion-col>
         <ion-col *ngFor="let comiParto of animal.comiParto">
           <ion-button color="primary" (click)="updateParto(comiParto._id)">
@@ -299,11 +293,15 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
-    <ion-button expand="full" (click)="addParto(animal.id)">
+    <!-- <ion-button expand="full" (click)="addParto(animal.id)">
       <ion-icon slot="start" name="add"></ion-icon>
       Agregar Parto
+    </ion-button> -->
+    <ion-button expand="full" (click)="masInfoParto()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Expandir
     </ion-button>
   </ion-list>
 

@@ -50,7 +50,7 @@ export class UpdatePartoPage implements OnInit {
   }
 
   redirectInfoVaca() {
-    this.router.navigate(['/info-vaca', this.animalId]);
+    this.router.navigate(['/info-parto', this.animalId]);
 
   }
 

@@ -1,0 +1,84 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="retroceder()"></ion-back-button>
+    </ion-buttons>
+    <ion-title
+      >Info de Parto de:
+      <span class="name"> {{ animal?.nombre }} </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-button expand="full" (click)="addParto(animal.id)">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Agregar Parto
+  </ion-button>
+
+  <ion-list *ngIf="animal?.comiParto && animal.comiParto.length > 0">
+    <ion-list-header>Info de Parto:</ion-list-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col>Fecha de parto</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.fechaParto | date:'dd-MM-yyyy'}}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Sexo del becerro</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.sexoBecerro }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Peso del becerro (Kg)</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.pesoBecerroKg }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Día de producción</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.diaProduccion }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Producción total</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.produccionTotal }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Producción X</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.produccionX }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Observación</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto"
+          >{{ comiParto.observacion }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col>Acciones</ion-col>
+        <ion-col *ngFor="let comiParto of animal.comiParto">
+          <ion-button color="primary" (click)="updateParto(comiParto._id)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" (click)="deleteParto(comiParto._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+  <ion-list *ngIf="!animal?.comiParto || animal.comiParto.length === 0">
+    <ion-list-header>Info de Parto:</ion-list-header>
+    <ion-item>
+      <ion-label>No hay información de parto</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

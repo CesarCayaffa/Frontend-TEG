@@ -87,80 +87,14 @@ export class InfoVacaPage implements OnInit {
   //Palpacion
   masInfoPalpacion() {
     this.router.navigate(['/info-palpacion/', this.id]);
-
-   
-  }
-
-  addPalpacion(id: string) {
-    this.router.navigate(['/add-palpacion', this.id]);
-  }
-  updatePalpacion(palpacionId: string) {
-    this.router.navigate(['/update-palpacion', this.id, palpacionId]);
-  }
-  deletePalpacion(palpacionId: string) {
-    this.alertController
-      .create({
-        // header: 'Eliminar',
-        message: '¿Estás seguro de que deseas eliminar esta palpación?',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-          },
-          {
-            text: 'Eliminar',
-            handler: () => {
-              const url = `${this.baseUrl}/deletePalpacion/${this.id}/${palpacionId}`;
-
-              this.http.patch(url, {}).subscribe(() => {
-                this.getAnimalById(this.id).subscribe((animal) => {
-                  this.animal = animal;
-                });
-              });
-            },
-          },
-        ],
-      })
-      .then((alert) => {
-        alert.present();
-      });
   }
 
   //Parto
-  addParto(id: string) {
-    this.router.navigate(['/add-parto', this.id]);
+  masInfoParto(){
+    this.router.navigate(['/info-parto/', this.id]);
   }
-  updateParto(partoId: string) {
-    this.router.navigate(['/update-parto', this.id, partoId]);
-  }
-  deleteParto(partoId: string) {
-    this.alertController
-      .create({
-        // header: 'Eliminar',
-        message: '¿Estás seguro de que deseas eliminar este parto?',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-          },
-          {
-            text: 'Eliminar',
-            handler: () => {
-              const url = `${this.baseUrl}/deleteParto/${this.id}/${partoId}`;
 
-              this.http.patch(url, {}).subscribe(() => {
-                this.getAnimalById(this.id).subscribe((animal) => {
-                  this.animal = animal;
-                });
-              });
-            },
-          },
-        ],
-      })
-      .then((alert) => {
-        alert.present();
-      });
-  }
+
 
   //LecheMes
   addLecheMes(id: string) {
