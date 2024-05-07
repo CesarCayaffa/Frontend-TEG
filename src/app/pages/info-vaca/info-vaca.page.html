@@ -129,15 +129,21 @@
 
   <!-- Condiciones -->
   <ion-list>
-    <ion-list-header>Condiciones:</ion-list-header>
+    <ion-list-header>Enfermedades y/o Deformaciones:</ion-list-header>
     <ng-container *ngFor="let condicion of animal.condiciones">
-      <ion-chip
-      (click)="eliminarCondicion(condicion._id)"
-        [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}"
-      >
+      <ion-chip *ngIf="!condicion.curada" (click)="eliminarCondicion(condicion._id)"
+        [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}">
         <ion-label> {{ condicion.nombre }} </ion-label>
       </ion-chip>
     </ng-container>
+    <ng-container *ngFor="let condicion of animal.condiciones">
+      <ion-list-header *ngIf="condicion.curada">Enfermedades curadas:</ion-list-header>
+      <ion-chip *ngIf="condicion.curada"
+        [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}">
+        <ion-label> {{ condicion.nombre }} </ion-label>
+      </ion-chip>
+    </ng-container>
+    <ion-item *ngIf="animal.condiciones.length === 0">Este animal está sano</ion-item>
   </ion-list>
 
   <!-- Palpaciones -->

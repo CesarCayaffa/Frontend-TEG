@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { RefresherEventDetail } from '@ionic/core';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
-import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component'
+import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component';
 
 @Component({
   selector: 'app-info-vaca',
@@ -94,62 +94,76 @@ export class InfoVacaPage implements OnInit {
   }
 
   //Parto
-  masInfoParto(){
+  masInfoParto() {
     this.router.navigate(['/info-parto/', this.id]);
     this.popoverController.dismiss();
   }
 
-
-
   //LecheMes
-  masInfoLecheMes(){
+  masInfoLecheMes() {
     this.router.navigate(['/info-mes-leche/', this.id]);
     this.popoverController.dismiss();
   }
 
   //Condiciones
-  addEnfermedad(id: string){
+  addEnfermedad(id: string) {
     this.router.navigate(['/info-condiciones/', this.id]);
   }
 
   //Popover
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
-      component: PopOverInfoComponent, 
+      component: PopOverInfoComponent,
       event: ev,
       translucent: true,
-      componentProps: { 
+      componentProps: {
         id: this.id,
         masInfoPalpacion: this.masInfoPalpacion.bind(this),
         masInfoParto: this.masInfoParto.bind(this),
-        masInfoLecheMes: this.masInfoLecheMes.bind(this)
-      }
+        masInfoLecheMes: this.masInfoLecheMes.bind(this),
+      },
     });
     return await popover.present();
   }
 
-  eliminarCondicion(id: string){
-    this.alertController.create({
-      message: '¿Estás seguro de que deseas eliminar esta condición?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Eliminar',
-          handler: () => {
-            const url = `${this.baseUrl}/deleteCondicion/${this.id}/${id}`;
-            this.http.patch(url, {}).subscribe(() => {
-              this.getAnimalById(this.id).subscribe((animal) => {
-                this.animal = animal;
-              });
-            });
+  eliminarCondicion(id: string) {
+    this.alertController
+      .create({
+        message: '¿Estás seguro de que deseas eliminar esta condición?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
           },
-        },
-      ],
-    }).then((alert) => {
-      alert.present();
-    });
+          {
+            text: 'Curar',
+            handler: () => {
+              const url = `${this.baseUrl}/updateCondicion/${this.id}/${id}`;
+              const data = {
+                curada: true
+              };
+              this.http.patch(url, data).subscribe(() => {
+                this.getAnimalById(this.id).subscribe((animal) => {
+                  this.animal = animal;
+                });
+              });
+            }
+          },
+          {
+            text: 'Eliminar',
+            handler: () => {
+              const url = `${this.baseUrl}/deleteCondicion/${this.id}/${id}`;
+              this.http.patch(url, {}).subscribe(() => {
+                this.getAnimalById(this.id).subscribe((animal) => {
+                  this.animal = animal;
+                });
+              });
+            },
+          },
+        ],
+      })
+      .then((alert) => {
+        alert.present();
+      });
   }
 }
