@@ -129,7 +129,7 @@ export class InfoVacaPage implements OnInit {
   eliminarCondicion(id: string) {
     this.alertController
       .create({
-        message: '¿Estás seguro de que deseas eliminar esta condición?',
+        message: '¿Estás seguro de que deseas Curar o Eliminar esta condición?',
         buttons: [
           {
             text: 'Cancelar',
