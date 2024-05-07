@@ -186,10 +186,32 @@ export class InfoCondicionesPage implements OnInit {
   animalId: string = '';
   animal: any;
 
-  condicionesSeleccionadas: any[] = [];
+  // showEnfermedades
+  showEnfermedades = false;
+  toggleEnfermedades() {
+    this.showEnfermedades = !this.showEnfermedades;
+  }
 
+  // showDeformaciones
+  showDeformaciones = false;
+  toggleDeformaciones() {
+    this.showDeformaciones = !this.showDeformaciones;
+  }
+  
+  condicionesSeleccionadas: any[] = [];
+  condicionYaSeleccionada(condicion: any) {
+    return this.condicionesSeleccionadas.some(c => c.nombre === condicion.nombre);
+  }
+
+  // seleccionarCondicion(condicion: any) {
+  //   this.condicionesSeleccionadas.push(condicion);
+  // }
   seleccionarCondicion(condicion: any) {
-    this.condicionesSeleccionadas.push(condicion);
+    if (this.condicionYaSeleccionada(condicion)) {
+      this.condicionesSeleccionadas = this.condicionesSeleccionadas.filter(c => c.nombre !== condicion.nombre);
+    } else {
+      this.condicionesSeleccionadas.push(condicion);
+    }
   }
 
   constructor(
@@ -228,6 +250,12 @@ export class InfoCondicionesPage implements OnInit {
       .subscribe(response => {
         console.log(response);
       });
+
+    this.router.navigate(['/info-vaca', this.animalId]);
+  }
+
+  eliminarCondicion(condicion: any) {
+    this.condicionesSeleccionadas = this.condicionesSeleccionadas.filter(c => c.nombre !== condicion.nombre);
   }
 
   regresar() {
