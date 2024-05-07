@@ -75,6 +75,10 @@ const routes: Routes = [
     path: 'info-condiciones/:animalId',
     loadChildren: () => import('./pages/condiciones/info-condiciones/info-condiciones.module').then( m => m.InfoCondicionesPageModule)
   },
+  {
+    path: 'all-report',
+    loadChildren: () => import('./pages/reportes/all-report/all-report.module').then( m => m.AllReportPageModule)
+  },
 ];
 
 @NgModule({
