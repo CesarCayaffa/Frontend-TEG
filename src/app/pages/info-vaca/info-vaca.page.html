@@ -132,6 +132,7 @@
     <ion-list-header>Condiciones:</ion-list-header>
     <ng-container *ngFor="let condicion of animal.condiciones">
       <ion-chip
+      (click)="eliminarCondicion(condicion._id)"
         [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}"
       >
         <ion-label> {{ condicion.nombre }} </ion-label>

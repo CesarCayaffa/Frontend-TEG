@@ -127,4 +127,29 @@ export class InfoVacaPage implements OnInit {
     });
     return await popover.present();
   }
+
+  eliminarCondicion(id: string){
+    this.alertController.create({
+      message: '¿Estás seguro de que deseas eliminar esta condición?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            const url = `${this.baseUrl}/deleteCondicion/${this.id}/${id}`;
+            this.http.patch(url, {}).subscribe(() => {
+              this.getAnimalById(this.id).subscribe((animal) => {
+                this.animal = animal;
+              });
+            });
+          },
+        },
+      ],
+    }).then((alert) => {
+      alert.present();
+    });
+  }
 }
