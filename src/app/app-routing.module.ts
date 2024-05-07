@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'info-mes-leche/:animalId',
     loadChildren: () => import('./pages/mesleche/info-mes-leche/info-mes-leche.module').then( m => m.InfoMesLechePageModule)
   },
+  {
+    path: 'info-condiciones/:animalId',
+    loadChildren: () => import('./pages/condiciones/info-condiciones/info-condiciones.module').then( m => m.InfoCondicionesPageModule)
+  },
 ];
 
 @NgModule({

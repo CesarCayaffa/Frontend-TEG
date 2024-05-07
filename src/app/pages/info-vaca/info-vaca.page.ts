@@ -107,6 +107,11 @@ export class InfoVacaPage implements OnInit {
     this.popoverController.dismiss();
   }
 
+  //Condiciones
+  addEnfermedad(id: string){
+    this.router.navigate(['/info-condiciones/', this.id]);
+  }
+
   //Popover
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
