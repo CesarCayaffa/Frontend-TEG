@@ -68,3 +68,21 @@ body {
     width: auto;
     height: 25px;
   }
+
+  .leve {
+    background-color: #FFD700;
+
+  }
+  
+  .moderada {
+    background-color: rgb(255, 157, 0);
+  }
+  
+  .grave {
+    background-color: red;
+  }
+
+  ion-chip {
+    color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
