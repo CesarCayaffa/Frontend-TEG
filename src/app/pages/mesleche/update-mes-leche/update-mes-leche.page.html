@@ -15,14 +15,31 @@
   </ion-header>
 
   <form (ngSubmit)="updateLecheMes()">
-    <ion-item>
-      <ion-label position="floating">Mes</ion-label>
-      <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].mes" name="mes" required></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Cantidad de Leche</ion-label>
-      <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].cantidadLeche" name="cantidadLeche" required></ion-input>
+    <!-- <ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Mes</ion-label>
+        <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].mes" name="mes" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Cantidad de Leche</ion-label>
+        <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].cantidadLeche" name="cantidadLeche" required></ion-input>
+      </ion-item>
+
+    </ion-item> -->
+
+    <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
+      <ion-item>
+        <ion-label position="floating">Mes {{i + 1}}</ion-label>
+        <ion-input type="number" [(ngModel)]="leche.mes" name="mes{{i + 1}}" [required]="i === 0"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Cantidad de Leche</ion-label>
+        <ion-input type="number" [(ngModel)]="leche.cantidadLeche" name="cantidadLeche{{i + 1}}" [required]="i === 0"></ion-input>
+      </ion-item>
     </ion-item>
 
     <ion-item lines="none">
