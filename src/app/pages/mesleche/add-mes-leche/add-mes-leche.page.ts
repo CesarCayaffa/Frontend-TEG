@@ -9,8 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddMesLechePage implements OnInit {
   lecheMes = {
-    mes: '',
-    cantidadLeche: '',
+    idComiParto: '',
+    lecheXmes: [
+      {
+        mes: '',
+        cantidadLeche: '',
+      },
+    ] ,
     fechaSecado: ''
   };
   id: any;

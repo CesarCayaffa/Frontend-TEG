@@ -29,6 +29,7 @@ export class InfoMesLechePage implements OnInit {
       this.animalId = id;
       this.http.get(`${this.baseUrl}/${this.animalId}`).subscribe((data) => {
         this.animal = data;
+        console.log(this.animal);
       });
     }
   }
