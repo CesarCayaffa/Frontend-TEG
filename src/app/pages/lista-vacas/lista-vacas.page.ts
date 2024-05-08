@@ -35,6 +35,7 @@ export class ListaVacasPage implements OnInit {
         esBecerro: animal.esBecerro,
         raza: animal.raza,
         years: animal.edad.years,
+  
       }));
       this.filteredAnimals = this.animals;
     });

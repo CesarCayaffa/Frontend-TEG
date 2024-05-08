@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./info-condiciones.page.scss'],
 })
 export class InfoCondicionesPage implements OnInit {
-  condiciones: any[] = [
+  condicionesOriginales: any[] = [
     { nombre: 'Mastitis', gravedad: 'moderada', observaciones: 'enfermedad' },
     { nombre: 'Babesiosis', gravedad: 'grave', observaciones: 'enfermedad' },
     { nombre: 'Brucelosis', gravedad: 'grave', observaciones: 'enfermedad' },
@@ -182,6 +182,8 @@ export class InfoCondicionesPage implements OnInit {
     { nombre: 'Orejas caídas', gravedad: 'leve', observaciones: 'deformación' },
   ];
 
+  condiciones = [ ...this.condicionesOriginales ];
+
   private baseUrl = 'https://backend-teg.up.railway.app/animals';
   animalId: string = '';
   animal: any;
@@ -228,6 +230,7 @@ export class InfoCondicionesPage implements OnInit {
         this.animal = data;
       });
     }
+
   }
 
   getAnimalById(id: string) {
@@ -261,4 +264,23 @@ export class InfoCondicionesPage implements OnInit {
   regresar() {
     this.router.navigate(['/info-vaca', this.animalId]);
   }
+
+  showSearchBar = false;
+  toggleSearchBar() {
+    this.showSearchBar = !this.showSearchBar;
+    this.searchTerm = '';
+    this.showEnfermedades = !this.showEnfermedades;
+    this.showDeformaciones = !this.showDeformaciones;
+  }
+
+  searchTerm = '';
+  filterCondiciones() {
+    this.condiciones = this.condicionesOriginales.filter((condicion) => {
+      const matchesSearchTerm =
+        this.searchTerm === '' ||
+        condicion.nombre.toLowerCase().includes(this.searchTerm.toLowerCase());
+      return matchesSearchTerm;
+    });
+  }
+
 }

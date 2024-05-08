@@ -3,7 +3,23 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="regresar()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Agregar Condiciones</ion-title>
+    <ion-title
+    *ngIf="!showSearchBar"
+    >Agregar Condiciones</ion-title>
+
+    <ion-searchbar
+    *ngIf="showSearchBar"
+      [(ngModel)]="searchTerm"
+      (ionInput)="filterCondiciones()"
+      placeholder="Buscar por nombre o número"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button
+      (click)="toggleSearchBar()"
+      >
+      <ion-icon name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,8 +33,12 @@
   </ion-item>
   <ion-button (click)="guardarCondiciones()">Agregar Condicion</ion-button>
 
-  <ion-item (click)="toggleEnfermedades()"> Enfermedades:  
-    <ion-icon slot="end" [name]="showEnfermedades ? 'chevron-up' : 'chevron-down'"></ion-icon>
+  <ion-item (click)="toggleEnfermedades()">
+    Enfermedades:
+    <ion-icon
+      slot="end"
+      [name]="showEnfermedades ? 'chevron-up' : 'chevron-down'"
+    ></ion-icon>
   </ion-item>
   <ng-container *ngIf="showEnfermedades">
     <ng-container *ngFor="let condicion of condiciones">
@@ -32,20 +52,14 @@
     </ng-container>
   </ng-container>
 
-  <!-- <ng-container *ngFor="let condicion of condiciones">
-    <ion-chip
-      *ngIf="condicion.observaciones === 'enfermedad'"
-      [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}"
-      (click)="seleccionarCondicion(condicion)"
-    >
-      <ion-label> {{ condicion.nombre }} </ion-label>
-    </ion-chip>
-  </ng-container> -->
 
-  <ion-item 
-  (click)="toggleDeformaciones()"> Deformaciones: 
-    <ion-icon slot="end" [name]="showDeformaciones ? 'chevron-up' : 'chevron-down'"></ion-icon>
- </ion-item>
+  <ion-item (click)="toggleDeformaciones()">
+    Deformaciones:
+    <ion-icon
+      slot="end"
+      [name]="showDeformaciones ? 'chevron-up' : 'chevron-down'"
+    ></ion-icon>
+  </ion-item>
 
   <ng-container *ngIf="showDeformaciones">
     <ng-container *ngFor="let condicion of condiciones">
@@ -57,13 +71,6 @@
         <ion-label> {{ condicion.nombre }} </ion-label>
       </ion-chip>
     </ng-container>
-  <!-- <ng-container *ngFor="let condicion of condiciones">
-    <ion-chip
-      *ngIf="condicion.observaciones === 'deformación'"
-      [ngClass]="{'leve': condicion.gravedad === 'leve', 'moderada': condicion.gravedad === 'moderada', 'grave': condicion.gravedad === 'grave'}"
-      (click)="seleccionarCondicion(condicion)"
-      >
-      <ion-label> {{ condicion.nombre }} </ion-label>
-    </ion-chip>
-  </ng-container>
-</ion-content> -->
+
+  </ng-container></ion-content
+>
