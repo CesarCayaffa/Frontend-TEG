@@ -22,22 +22,18 @@ export class AllReportPage implements OnInit {
   isLoading = true;
 
   constructor(private http: HttpClient) {
-
     setInterval(() => {
       this.progress += 0.01;
-        if (this.progress > 1) {
+      if (this.progress > 1) {
         setTimeout(() => {
           this.progress = 0;
+          this.getReportCelo();
+          // this.segmentValue = 'celo';
           this.isLoading = false;
         }, 1000);
       }
     }, 50);
-
   }
-
-  
-
-
 
   ngOnInit() {
     this.segmentValue = 'all';
@@ -45,13 +41,11 @@ export class AllReportPage implements OnInit {
       // console.log(data);
       this.reportes = data;
     });
-    
+
     this.getReportCelo();
     this.getReportParto();
     this.getReportServicio();
     this.getReportPalpacion();
-
-
   }
 
   getAnimals(): Observable<any> {
@@ -91,8 +85,6 @@ export class AllReportPage implements OnInit {
       element.dias = diffDays;
     });
 
-
-
     // Ordenar los datos por dias de celo
     this.dataReportCelo.sort((a, b) => {
       return a.dias - b.dias;
@@ -108,20 +100,13 @@ export class AllReportPage implements OnInit {
     });
 
     //Eliminar los duplicados
-    this.dataReportCelo = this.dataReportCelo.filter((celo, index, self) =>
-      index === self.findIndex((t) => (
-        t.nombre === celo.nombre
-      ))
+    this.dataReportCelo = this.dataReportCelo.filter(
+      (celo, index, self) =>
+        index === self.findIndex((t) => t.nombre === celo.nombre)
     );
-    
-
-
-    console.log(this.dataReportCelo);
   }
 
-  getReportParto() {
-
-  }
+  getReportParto() {}
 
   getReportServicio() {
     // Filtrar los datos de reportes para obtener solo el nombre y la fecha de servicio
@@ -137,6 +122,37 @@ export class AllReportPage implements OnInit {
 
     // Aplanar el array de arrays
     this.dataReportServicio = [].concat.apply([], servicioData);
+
+    //realizar los calculos de los dias de servicio
+    this.dataReportServicio.forEach((element) => {
+      const fechaServicio = new Date(element.fecha);
+      const fechaActual = new Date();
+      const diffTime = Math.abs(
+        fechaActual.getTime() - fechaServicio.getTime()
+      );
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      element.dias = diffDays;
+    });
+
+    // Ordenar los datos por dias de servicio
+    this.dataReportServicio.sort((a, b) => {
+      return a.dias - b.dias;
+    });
+
+    //Cuantas veces ha estado en servicio
+    this.dataReportServicio.forEach((element) => {
+      const count = this.dataReportServicio.filter((servicio) => {
+        return servicio.nombre === element.nombre;
+      }).length;
+
+      element.count = count;
+    });
+
+    //Eliminar los duplicados
+    this.dataReportServicio = this.dataReportServicio.filter(
+      (servicio, index, self) =>
+        index === self.findIndex((t) => t.nombre === servicio.nombre)
+    );
   }
 
   getReportPalpacion() {
@@ -154,9 +170,59 @@ export class AllReportPage implements OnInit {
 
     // Aplanar el array de arrays
     this.dataReportPalpacion = [].concat.apply([], palpacionData);
+
+    //realizar calculos de los diagnostico de palpacion (Preñada, Aborto, Vacia)
+    //Preñada + Preñada = Preñada
+    //Preñada + Vacia = Aborto
+    //Vacia + Vacia = Vacia
+    //Vacía + Preñada = Preñada
+
+    this.dataReportPalpacion.forEach((element) => {
+      if (
+        element.diagnostico1 === 'Preñada' &&
+        element.diagnostico2 === 'Preñada'
+      ) {
+        element.diagnostico = 'Preñada';
+      } else if (
+        element.diagnostico1 === 'Preñada' &&
+        element.diagnostico2 === 'Vacia'
+      ) {
+        element.diagnostico = 'Aborto';
+      } else if (
+        element.diagnostico1 === 'Vacia' &&
+        element.diagnostico2 === 'Vacia'
+      ) {
+        element.diagnostico = 'Vacia';
+      } else if (
+        element.diagnostico1 === 'Vacia' &&
+        element.diagnostico2 === 'Preñada'
+      ) {
+        element.diagnostico = 'Preñada';
+      }
+    });
+
+    //Ordenar los datos por diagnostico de palpacion
+    // this.dataReportPalpacion.sort((a, b) => {
+    //   return a.diagnostico.localeCompare(b.diagnostico);
+    // });
+
+    //Cuantas veces ha estado en palpacion
+    // this.dataReportPalpacion.forEach((element) => {
+    //   const count = this.dataReportPalpacion.filter((palpacion) => {
+    //     return palpacion.nombre === element.nombre;
+    //   }).length;
+
+    //   element.count = count;
+    // });
+
+    //Eliminar los duplicados
+    // this.dataReportPalpacion = this.dataReportPalpacion.filter((palpacion, index, self) =>
+    //   index === self.findIndex((t) => (
+    //     t.nombre === palpacion.nombre
+    //   ))
+    // );
+    console.log(this.dataReportPalpacion);
   }
-
-
 
   segmentChanged(ev: any) {
     this.segmentValue = ev.detail.value;
@@ -171,6 +237,4 @@ export class AllReportPage implements OnInit {
       this.getReportPalpacion();
     }
   }
-
-  
 }

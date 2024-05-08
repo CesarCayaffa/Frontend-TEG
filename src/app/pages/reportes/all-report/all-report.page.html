@@ -37,8 +37,8 @@
     </ion-segment-button>
     <ion-segment-button >
       <ion-label>Producción de leche</ion-label>
-    </ion-segment-button> -->
-    <!-- <ion-segment-button >
+    </ion-segment-button>
+    <ion-segment-button >
       <ion-label>Becerros</ion-label>
     </ion-segment-button>
     <ion-segment-button >
@@ -64,7 +64,7 @@
 
   <ion-card *ngIf="segmentValue === 'celo'">
     <ion-card-header>
-      <ion-card-title>Fechas de Celos </ion-card-title>
+      <ion-card-title>Fecha de ultimo Celo </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -99,6 +99,17 @@
         </ion-item>
       </ion-list>
     </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>Reporte de Servicios</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of dataReportServicio">
+          <ion-label>Nombre: {{item.nombre}}</ion-label>
+          <ion-label>Veces Servida: {{ item.count }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 
   <ion-card *ngIf="segmentValue === 'palpacion'">
@@ -109,10 +120,13 @@
       <ion-list>
         <ion-item *ngFor="let item of dataReportPalpacion">
           <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
-          <ion-label>Diagnostico: {{item.diagnostico2}}</ion-label>
+          <!-- <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
+          <ion-label>Diagnostico: {{item.diagnostico2}}</ion-label> -->
+          <ion-label>Diagnostico: {{item.diagnostico}}</ion-label>
         </ion-item>
       </ion-list>
+
+
     </ion-card-content>
   </ion-card>
 </div>
