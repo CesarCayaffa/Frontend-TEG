@@ -17,12 +17,12 @@
   <form (ngSubmit)="updateLecheMes()">
     <ion-item>
       <ion-label position="floating">Mes</ion-label>
-      <ion-input type="number" [(ngModel)]="lecheMes.mes" name="mes" required></ion-input>
+      <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].mes" name="mes" required></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Cantidad de Leche</ion-label>
-      <ion-input type="number" [(ngModel)]="lecheMes.cantidadLeche" name="cantidadLeche" required></ion-input>
+      <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].cantidadLeche" name="cantidadLeche" required></ion-input>
     </ion-item>
 
     <ion-item lines="none">
