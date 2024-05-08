@@ -28,11 +28,11 @@ export class AllReportPage implements OnInit {
         setTimeout(() => {
           this.progress = 0;
           this.getReportCelo();
-          // this.segmentValue = 'celo';
           this.isLoading = false;
         }, 1000);
       }
-    }, 50);
+    }, 10
+  );
   }
 
   ngOnInit() {

@@ -52,14 +52,26 @@
 
 <ion-card *ngIf="segmentValue === 'all'">
   <ion-card-header>
-    <ion-card-title>Cargando los Reportes</ion-card-title>
+    <ion-card-title
+    *ngIf="!isLoading"
+    >Selecciona un tipo de Reporte</ion-card-title>
   </ion-card-header>
+  <ion-card-header>
+    <ion-card-title
+    *ngIf="isLoading"
+    >Cargando los Reportes</ion-card-title>
+  </ion-card-header>
+  
   <ion-card-content>
     <ion-progress-bar 
     *ngIf="isLoading"
     [value]="progress"></ion-progress-bar>
   </ion-card-content>
+  
+
 </ion-card>
+
+
 <div *ngIf="!isLoading">
 
   <ion-card *ngIf="segmentValue === 'celo'">
@@ -130,42 +142,6 @@
     </ion-card-content>
   </ion-card>
 </div>
-
-
-  <!-- <ion-list 
-  *ngIf="segmentValue === 'celo'"
-  >
-    <ion-item *ngFor="let item of dataReportCelo">
-      <ion-label>Nombre: {{item.nombre}}</ion-label>
-      <ion-label>Fecha de Celo: {{item.fecha | date:'shortDate'}}</ion-label>
-    </ion-item> -->
-    <!-- <ion-item *ngFor="let report of reports">
-      <ion-label>{{report.date}}</ion-label>
-      <ion-label>{{report.description}}</ion-label>
-      <ion-label>{{report.value}}</ion-label>
-    </ion-item> -->
-  <!-- </ion-list>
-
-  <ion-list
-  *ngIf="segmentValue === 'servicio'"
-  >
-    <ion-item *ngFor="let item of dataReportServicio">
-      <ion-label>Nombre: {{item.nombre}}</ion-label>
-      <ion-label>Fecha de Servicio: {{item.fecha | date:'shortDate'}}</ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ion-list
-  *ngIf="segmentValue === 'palpacion'"
-  >
-    <ion-item *ngFor="let item of dataReportPalpacion">
-      <ion-label>Nombre: {{item.nombre}}</ion-label>
-      <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
-      <ion-label>Diagnostico: {{item.diagnostico2}}</ion-label>
-    </ion-item>
-  </ion-list> -->
-
-
 
 
 </ion-content>
