@@ -28,9 +28,9 @@
       </ion-item>
     </ion-item> -->
 
-    <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
+        <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
       <ion-item>
-        <ion-label position="floating">Mes</ion-label>
+        <ion-label position="floating">Mes {{i + 1}}</ion-label>
         <ion-input type="number" [(ngModel)]="leche.mes" name="mes{{i + 1}}" [required]="i === 0"></ion-input>
       </ion-item>
   

@@ -78,4 +78,13 @@ export class InfoMesLechePage implements OnInit {
     this.router.navigate(['/info-vaca', this.animalId]);
   }
   
+  getLastNonEmptyMes(lecheXmes: any[]) {
+    const nonEmptyMes = lecheXmes.filter(leche => leche.mes !== null);
+    return nonEmptyMes.length > 0 ? nonEmptyMes.slice(-1)[0].mes : null;
+  }
+  
+  getLastNonEmptyCantidadLeche(lecheXmes: any[]) {
+    const nonEmptyCantidadLeche = lecheXmes.filter(leche => leche.cantidadLeche !== null);
+    return nonEmptyCantidadLeche.length > 0 ? nonEmptyCantidadLeche.slice(-1)[0].cantidadLeche : null;
+  }
 }

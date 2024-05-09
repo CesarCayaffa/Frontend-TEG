@@ -20,33 +20,62 @@
     <ion-list-header>Info de Leche por Mes:</ion-list-header>
     <ion-grid>
       <!-- <ion-row>
-        <ion-col>Mes</ion-col>
-        <ion-col *ngFor="let lecheMes of animal.lecheMes"
-          >{{ lecheMes.lecheXmes[0].mes }}</ion-col
-        >
-      </ion-row>
-      <ion-row>
-        <ion-col>Cantidad de leche</ion-col>
-        <ion-col *ngFor="let lecheMes of animal.lecheMes"
-          >{{ lecheMes.cantidadLeche }}</ion-col
-        >
-      </ion-row> -->
-      <ion-row>
-        <ion-col>Mes</ion-col>
-        <ion-col *ngFor="let lecheMes of animal.lecheMes">
-          <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
-            {{ lecheXmes.mes }}
-          </ng-container>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>Cantidad de leche</ion-col>
-        <ion-col *ngFor="let lecheMes of animal.lecheMes">
-          <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
+          <ion-col>Mes</ion-col>
+          <ion-col *ngFor="let lecheMes of animal.lecheMes">
+            <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
+              {{ lecheXmes.mes }}
+            </ng-container>
+          </ion-col>
+        </ion-row> -->
+
+      <!-- <ion-row>
+          <ion-col>Cantidad de leche</ion-col>
+          <ion-col *ngFor="let lecheMes of animal.lecheMes">
+            <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
             {{ lecheXmes.cantidadLeche }}
-          </ng-container>
-        </ion-col>
+            </ng-container>
+          </ion-col>
+        </ion-row> -->
+
+      <!-- <ion-row>
+        <ion-col>Mes</ion-col>
+        <ng-container *ngFor="let lecheMes of animal.lecheMes">
+          <ion-col *ngFor="let lecheXmes of lecheMes.lecheXmes">
+            {{ lecheXmes.mes }}
+          </ion-col>
+        </ng-container>
       </ion-row>
+
+      <ion-row>
+          <ion-col>Cantidad de leche</ion-col>
+          <ng-container *ngFor="let lecheMes of animal.lecheMes">
+            <ion-col *ngFor="let lecheXmes of lecheMes.lecheXmes">
+            {{ lecheXmes.cantidadLeche }}
+          </ion-col>
+        </ng-container>
+        </ion-row> -->
+
+
+        <ion-row>
+          <ion-col>Mes</ion-col>
+          <ng-container *ngFor="let lecheMes of animal.lecheMes">
+            <ion-col>
+              {{ getLastNonEmptyMes(lecheMes.lecheXmes) }}
+            </ion-col>
+          </ng-container>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col>Cantidad de leche</ion-col>
+          <ng-container *ngFor="let lecheMes of animal.lecheMes">
+            <ion-col>
+              {{ getLastNonEmptyCantidadLeche(lecheMes.lecheXmes) }}
+            </ion-col>
+          </ng-container>
+        </ion-row>
+        
+
+
       <ion-row>
         <ion-col>Fecha de secado</ion-col>
         <ion-col *ngFor="let lecheMes of animal.lecheMes">
