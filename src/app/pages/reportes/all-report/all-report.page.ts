@@ -14,6 +14,7 @@ export class AllReportPage implements OnInit {
   dataReportParto: any[] = [];
   dataReportServicio: any[] = [];
   dataReportPalpacion: any[] = [];
+  dataReportLeche: any[] = [];
   progress: number = 0;
 
   public segmentValue: string = 'celo';
@@ -31,8 +32,7 @@ export class AllReportPage implements OnInit {
           this.isLoading = false;
         }, 1000);
       }
-    }, 10
-  );
+    }, 10);
   }
 
   ngOnInit() {
@@ -46,6 +46,7 @@ export class AllReportPage implements OnInit {
     this.getReportParto();
     this.getReportServicio();
     this.getReportPalpacion();
+    this.getReportLeche();
   }
 
   getAnimals(): Observable<any> {
@@ -106,7 +107,74 @@ export class AllReportPage implements OnInit {
     );
   }
 
-  getReportParto() {}
+  getReportParto() {
+    // Filtrar los datos de reportes para obtener solo el nombre y la fecha de parto
+    const partoData = this.reportes.map((animal) => {
+      return animal.comiParto.map((comiParto: any) => {
+        // Specify the type of 'palpacion' parameter
+        return {
+          nombre: animal.nombre,
+          fecha: comiParto.fechaParto,
+        };
+      });
+    });
+
+    // Aplanar el array de arrays
+    this.dataReportParto = [].concat.apply([], partoData);
+
+    //realizar los calculos de los dias de parto
+    this.dataReportParto.forEach((element) => {
+      const fechaParto = new Date(element.fecha);
+      const fechaActual = new Date();
+      const diffTime = Math.abs(fechaActual.getTime() - fechaParto.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      element.dias = diffDays;
+    });
+
+    // Intervalo de partos
+    this.dataReportParto.forEach((element) => {
+      const partos = this.dataReportParto.filter((parto) => {
+        return parto.nombre === element.nombre;
+      });
+
+      const intervalo = partos.map((parto, index) => {
+        if (index === 0) {
+          return 0;
+        }
+
+        const fechaParto = new Date(parto.fecha);
+        const fechaAnterior = new Date(partos[index - 1].fecha);
+        const diffTime = Math.abs(
+          fechaParto.getTime() - fechaAnterior.getTime()
+        );
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+      });
+
+      // Asignar el último intervalo calculado
+      element.intervalo = intervalo[intervalo.length - 1];
+    });
+
+    //Eliminar los duplicados
+    this.dataReportParto = this.dataReportParto.filter(
+      (parto, index, self) =>
+        index === self.findIndex((t) => t.nombre === parto.nombre)
+    );
+
+    // Ordenar los datos por dias de parto
+    this.dataReportParto.sort((a, b) => {
+      return a.dias - b.dias;
+    });
+
+    //Cuantas veces ha estado en parto
+    this.dataReportParto.forEach((element) => {
+      const count = this.dataReportParto.filter((parto) => {
+        return parto.nombre === element.nombre;
+      }).length;
+
+      element.count = count;
+    });
+  }
 
   getReportServicio() {
     // Filtrar los datos de reportes para obtener solo el nombre y la fecha de servicio
@@ -224,6 +292,29 @@ export class AllReportPage implements OnInit {
     console.log(this.dataReportPalpacion);
   }
 
+  getReportLeche() {
+    // Filtrar los datos de reportes para obtener solo el nombre y la fecha de leche
+    const lecheData = this.reportes.map((animal) => {
+      return animal.lecheMes.map((lecheMes: { lecheXmes: { cantidadLeche: number; mes: number; }[]; fechaSecado: Date; }) => {
+        return {
+          nombre: animal.nombre,
+          cantidadLeche: lecheMes.lecheXmes.map((lecheXmes: { cantidadLeche: number; mes: number; }) => {
+            return lecheXmes.cantidadLeche;
+          }),
+          mes: lecheMes.lecheXmes.map((lecheXmes: { cantidadLeche: number; mes: number; }) => {
+            return lecheXmes.mes;
+          }),
+          fechaSecado: lecheMes.fechaSecado,
+        };
+      });
+    });
+
+    // Aplanar el array de arrays
+    const dataReportLeche = [].concat.apply([], lecheData);
+
+
+  }
+
   segmentChanged(ev: any) {
     this.segmentValue = ev.detail.value;
 
@@ -234,6 +325,13 @@ export class AllReportPage implements OnInit {
     } else if (this.segmentValue === 'servicio') {
       this.getReportServicio();
     } else if (this.segmentValue === 'palpacion') {
+      this.getReportPalpacion();
+    } else if (this.segmentValue === 'leche') {
+      this.getReportLeche();
+    } else if (this.segmentValue === 'all') {
+      this.getReportCelo();
+      this.getReportParto();
+      this.getReportServicio();
       this.getReportPalpacion();
     }
   }

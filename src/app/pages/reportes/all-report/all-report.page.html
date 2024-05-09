@@ -32,13 +32,13 @@
     <ion-segment-button value="palpacion">
       <ion-label>Palpaciones</ion-label>
     </ion-segment-button>
-    <!-- <ion-segment-button >
+    <ion-segment-button value="parto">
       <ion-label>Partos</ion-label>
     </ion-segment-button>
-    <ion-segment-button >
+    <!-- <ion-segment-button value="leche">
       <ion-label>Producción de leche</ion-label>
-    </ion-segment-button>
-    <ion-segment-button >
+    </ion-segment-button> -->
+    <!-- <ion-segment-button >
       <ion-label>Becerros</ion-label>
     </ion-segment-button>
     <ion-segment-button >
@@ -141,6 +141,38 @@
 
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="segmentValue === 'parto'">
+    <ion-card-header>
+      <ion-card-title>Partos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of dataReportParto">
+          <ion-label>Nombre: {{item.nombre}}</ion-label>
+          <ion-label>Fecha de Parto: {{item.fecha | date:'shortDate'}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>Reporte de Partos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of dataReportParto">
+          <ion-label>Nombre: {{item.nombre}}</ion-label>
+          <ion-label>Veces Parida: {{ item.count }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item *ngFor="let item of dataReportParto">
+          <ion-label>Nombre: {{item.nombre}}</ion-label>
+          <ion-label>intervalo entre partos: {{ item.intervalo }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
 </div>
 
 
