@@ -8,7 +8,9 @@ export class ThemeService {
   private darkTheme = new BehaviorSubject<boolean>(false);
   isDarkTheme = this.darkTheme.asObservable();
 
-  constructor() { }
+  constructor() { 
+    this.setDarkMode(false);
+   }
 
   setDarkMode(isDarkTheme: boolean) {
     this.darkTheme.next(isDarkTheme);
