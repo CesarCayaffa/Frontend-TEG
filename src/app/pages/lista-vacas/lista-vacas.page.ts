@@ -158,4 +158,10 @@ export class ListaVacasPage implements OnInit {
     });
     await actionSheet.present();
   }
+
+  showSearchBar= false;
+
+  toggleSearchBar(){
+    this.showSearchBar = !this.showSearchBar;
+  }
 }
