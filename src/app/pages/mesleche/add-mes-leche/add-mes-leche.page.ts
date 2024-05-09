@@ -20,6 +20,7 @@ export class AddMesLechePage implements OnInit {
   };
   id: any;
   baseUrl = 'https://backend-teg.up.railway.app/animals';
+  comiPartos: any[] = [];
 
   public showCalendar: boolean = false;
 
@@ -31,6 +32,8 @@ export class AddMesLechePage implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+    //hacer un get para traer la info de la vaca
+    this.getVaca();
   }
 
   addLecheMes() {
@@ -39,6 +42,16 @@ export class AddMesLechePage implements OnInit {
       this.redirecInfoVaca();
     }
     );
+  }
+
+  getVaca() {
+    const url = `${this.baseUrl}/${this.id}`;
+    this.http.get(url).subscribe((res: any) => {
+      this.comiPartos = res.comiParto; // Asume que la respuesta tiene una propiedad comiParto que es un array
+      this.comiPartos.forEach(comiParto => {
+        console.log(comiParto._id); // Imprime el _id de cada comiParto
+      });
+    });
   }
 
   redirecInfoVaca() {

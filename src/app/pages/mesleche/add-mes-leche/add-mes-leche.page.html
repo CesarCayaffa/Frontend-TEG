@@ -16,6 +16,16 @@
 
   <form (ngSubmit)="addLecheMes()">
 
+    <ion-item>
+      <ion-label>ID del parto</ion-label>
+      <ion-select [(ngModel)]="lecheMes.idComiParto">
+        <ion-select-option *ngFor="let comiParto of comiPartos" [value]="comiParto._id">
+          Parto:
+          {{ comiParto._id }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
     <!-- <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
       <ion-item>
         <ion-label position="floating">Mes {{i + 1}}</ion-label>
