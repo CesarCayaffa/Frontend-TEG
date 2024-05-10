@@ -4,6 +4,7 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Reportes</ion-title>
+    <ion-progress-bar *ngIf="isLoading" [value]="progress"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
@@ -51,13 +52,13 @@
         >Selecciona un tipo de Reporte</ion-card-title
       >
     </ion-card-header> -->
-    <ion-card-header>
+    <!-- <ion-card-header>
       <ion-card-title *ngIf="isLoading">Cargando los Reportes</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-progress-bar *ngIf="isLoading" [value]="progress"></ion-progress-bar>
-    </ion-card-content>
+    </ion-card-content> -->
   </ion-card>
 
   <div *ngIf="!isLoading">
