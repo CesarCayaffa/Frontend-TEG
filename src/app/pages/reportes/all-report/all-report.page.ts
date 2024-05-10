@@ -345,14 +345,14 @@ export class AllReportPage implements OnInit {
   }
 
   redirectToPalpacion(id: string) {
-    this.router.navigate(['/info-palpacion/', id]);
+    this.router.navigate(['/info-vaca/', id]);
   }
 
   redirectToParto(id: string) {
-    this.router.navigate(['/info-parto/', id]);
+    this.router.navigate(['/info-vaca/', id]);
   }
 
   redirectToLeche(id: string) {
-    this.router.navigate(['/info-mes-leche/', id]);
+    this.router.navigate(['/info-vaca/', id]);
   }
 }
