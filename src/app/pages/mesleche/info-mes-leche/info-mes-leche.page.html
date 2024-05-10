@@ -7,70 +7,51 @@
       >Info Lactancia de:
       <span class="name"> {{ animal?.nombre }} </span>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addLecheMes(animal.id)">
+        <ion-icon 
+        slot="icon-only"
+        name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button expand="full" (click)="addLecheMes(animal.id)">
+  <!-- <ion-button expand="full" (click)="addLecheMes(animal.id)">
     <ion-icon slot="start" name="add"></ion-icon>
-    Agregar Leche por Mes
-  </ion-button>
+    Agregar Lactancia
+  </ion-button> -->
 
   <ion-list *ngIf="animal?.lecheMes && animal.lecheMes.length > 0">
-    <ion-list-header>Info de Leche por Mes:</ion-list-header>
+    <ion-list-header>Ultimo registro:</ion-list-header>
     <ion-grid>
-      <!-- <ion-row>
-          <ion-col>Mes</ion-col>
-          <ion-col *ngFor="let lecheMes of animal.lecheMes">
-            <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
-              {{ lecheXmes.mes }}
-            </ng-container>
-          </ion-col>
-        </ion-row> -->
-
-      <!-- <ion-row>
-          <ion-col>Cantidad de leche</ion-col>
-          <ion-col *ngFor="let lecheMes of animal.lecheMes">
-            <ng-container *ngFor="let lecheXmes of lecheMes.lecheXmes">
-            {{ lecheXmes.cantidadLeche }}
-            </ng-container>
-          </ion-col>
-        </ion-row> -->
-
-      <!-- <ion-row>
-        <ion-col>Mes</ion-col>
-        <ng-container *ngFor="let lecheMes of animal.lecheMes">
-          <ion-col *ngFor="let lecheXmes of lecheMes.lecheXmes">
-            {{ lecheXmes.mes }}
-          </ion-col>
-        </ng-container>
-      </ion-row>
-
-      <ion-row>
-          <ion-col>Cantidad de leche</ion-col>
-          <ng-container *ngFor="let lecheMes of animal.lecheMes">
-            <ion-col *ngFor="let lecheXmes of lecheMes.lecheXmes">
-            {{ lecheXmes.cantidadLeche }}
-          </ion-col>
-        </ng-container>
-        </ion-row> -->
-
 
         <ion-row>
           <ion-col>Mes</ion-col>
           <ng-container *ngFor="let lecheMes of animal.lecheMes">
-            <ion-col>
+            <a (click)="updateLecheMes(lecheMes._id)">
+              <ion-col>
+                {{ getLastNonEmptyMes(lecheMes.lecheXmes) }}
+              </ion-col>
+            </a>
+            <!-- <ion-col>
               {{ getLastNonEmptyMes(lecheMes.lecheXmes) }}
-            </ion-col>
+            </ion-col> -->
           </ng-container>
         </ion-row>
         
         <ion-row>
           <ion-col>Cantidad de leche</ion-col>
           <ng-container *ngFor="let lecheMes of animal.lecheMes">
-            <ion-col>
+            <a (click)="updateLecheMes(lecheMes._id)">
+              <ion-col>
+                {{ getLastNonEmptyCantidadLeche(lecheMes.lecheXmes) }}
+              </ion-col>
+            </a>
+            <!-- <ion-col>
               {{ getLastNonEmptyCantidadLeche(lecheMes.lecheXmes) }}
-            </ion-col>
+            </ion-col> -->
           </ng-container>
         </ion-row>
         
@@ -78,22 +59,33 @@
 
       <ion-row>
         <ion-col>Fecha de secado</ion-col>
-        <ion-col *ngFor="let lecheMes of animal.lecheMes">
+        <a *ngFor="let lecheMes of animal.lecheMes" (click)="updateLecheMes(lecheMes._id)">
+          <ion-col>
+            {{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}
+          </ion-col>
+        </a>
+        <!-- <ion-col *ngFor="let lecheMes of animal.lecheMes">
           {{ lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-col
-        >
+        > -->
       </ion-row>
 
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>Acciones</ion-col>
+
         <ion-col *ngFor="let lecheMes of animal.lecheMes">
+
           <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
+            <ion-icon name="eye"></ion-icon>
+          </ion-button> -->
+
+          <!-- <ion-button color="primary" (click)="updateLecheMes(lecheMes._id)">
             <ion-icon name="create"></ion-icon>
-          </ion-button>
-          <ion-button color="danger" (click)="deleteLecheMes(lecheMes._id)">
+          </ion-button> -->
+          <!-- <ion-button color="danger" (click)="deleteLecheMes(lecheMes._id)">
             <ion-icon name="trash"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
+          </ion-button> -->
+        <!-- </ion-col>
+      </ion-row> -->
     </ion-grid>
   </ion-list>
 

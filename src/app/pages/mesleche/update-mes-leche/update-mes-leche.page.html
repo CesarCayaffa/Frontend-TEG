@@ -3,42 +3,50 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="redirectInfoVaca()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Editar la leche por mes</ion-title>
+    <ion-title *ngIf="!showLecheMes">Info de Lactancia</ion-title>
+    <ion-title *ngIf="showLecheMes">Actualizar Lactancia</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleLecheMes()" *ngIf="!showLecheMes">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        color="danger"
+        *ngIf="!showLecheMes"
+        (click)="deleteLecheMes(lecheMes.id)"
+      >
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="toggleLecheMes()" *ngIf="showLecheMes">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Editar la leche por mes</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <form (ngSubmit)="updateLecheMes()">
-
-    <!-- <ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Mes</ion-label>
-        <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].mes" name="mes" required></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="floating">Cantidad de Leche</ion-label>
-        <ion-input type="number" [(ngModel)]="lecheMes.lecheXmes[0].cantidadLeche" name="cantidadLeche" required></ion-input>
-      </ion-item>
-
-    </ion-item> -->
-
+  <form *ngIf="showLecheMes" (ngSubmit)="updateLecheMes()">
     <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
       <ion-item>
         <ion-label position="floating">Mes {{i + 1}}</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.mes" name="mes{{i + 1}}" [required]="i === 0"></ion-input>
+        <ion-input
+          type="number"
+          [(ngModel)]="leche.mes"
+          name="mes{{i + 1}}"
+          [required]="i === 0"
+        ></ion-input>
       </ion-item>
-  
+
       <ion-item>
         <ion-label position="floating">Cantidad de Leche</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.cantidadLeche" name="cantidadLeche{{i + 1}}" [required]="i === 0"></ion-input>
+        <ion-input
+          type="number"
+          [(ngModel)]="leche.cantidadLeche"
+          name="cantidadLeche{{i + 1}}"
+          [required]="i === 0"
+        ></ion-input>
       </ion-item>
     </ion-item>
 
@@ -51,11 +59,46 @@
       </ion-buttons>
     </ion-item>
     <ion-item>
-      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="lecheMes.fechaSecado" name="fechaSecado"
-        required></ion-datetime>
+      <ion-datetime
+        presentation="date"
+        [preferWheel]="true"
+        [(ngModel)]="lecheMes.fechaSecado"
+        name="fechaSecado"
+        required
+      ></ion-datetime>
     </ion-item>
 
-    <ion-button class="form-button" type="submit">Actualizar Leche Mes</ion-button>
+    <ion-button class="form-button" type="submit"
+      >Actualizar Leche Mes</ion-button
+    >
   </form>
 
+  <ion-card *ngIf="!showLecheMes">
+    <ion-card-header>
+      <ion-card-title>Leche por Mes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <ion-list>
+        <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
+          <ion-label>Mes {{i + 1}}</ion-label>
+          <ion-label>{{leche.mes}}</ion-label>
+          <ion-label>Cantidad de Leche</ion-label>
+          <ion-label>{{leche.cantidadLeche}}</ion-label>
+        </ion-item>
+      </ion-list> -->
+
+      <ion-label>Fecha de Secado: </ion-label>
+      <ion-label>{{lecheMes.fechaSecado | date:'dd-MM-yyyy' }}</ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Mes</ion-col>
+          <ion-col>Cantidad de Leche</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let leche of lecheMes.lecheXmes; let i = index">
+          <ion-col>{{leche.mes}}</ion-col>
+          <ion-col>{{leche.cantidadLeche}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
