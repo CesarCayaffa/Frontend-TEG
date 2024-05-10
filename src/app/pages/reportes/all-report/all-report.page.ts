@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { disableDebugTools } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-report',
@@ -24,8 +25,8 @@ export class AllReportPage implements OnInit {
   reportes: any[] = [];
   isLoading = true;
 
-  constructor(private http: HttpClient) {
-    if (this.isLoading === true){
+  constructor(private http: HttpClient, private router: Router) {
+    if (this.isLoading === true) {
       this.intervalId = setInterval(() => {
         this.progress += 0.01;
         if (this.progress > 1) {
@@ -34,7 +35,7 @@ export class AllReportPage implements OnInit {
             this.getReportCelo();
             this.isLoading = false;
             this.segmentValue = 'celo';
-            clearInterval(this.intervalId); 
+            clearInterval(this.intervalId);
           }, 1000);
         }
       }, 10);
@@ -163,18 +164,17 @@ export class AllReportPage implements OnInit {
       element.intervalo = intervalo[intervalo.length - 1];
     });
 
-    
     // Ordenar los datos por dias de parto
     this.dataReportParto.sort((a, b) => {
       return a.dias - b.dias;
     });
-    
+
     //Cuantas veces ha estado en parto
     this.dataReportParto.forEach((element) => {
       const count = this.dataReportParto.filter((parto) => {
         return parto.nombre === element.nombre;
       }).length;
-      
+
       element.count = count;
     });
 
@@ -342,5 +342,17 @@ export class AllReportPage implements OnInit {
       this.getReportPalpacion();
       this.getReportLeche();
     }
+  }
+
+  redirectToPalpacion(id: string) {
+    this.router.navigate(['/info-palpacion/', id]);
+  }
+
+  redirectToParto(id: string) {
+    this.router.navigate(['/info-parto/', id]);
+  }
+
+  redirectToLeche(id: string) {
+    this.router.navigate(['/info-mes-leche/', id]);
   }
 }

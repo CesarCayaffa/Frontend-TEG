@@ -70,7 +70,7 @@
           <ion-item *ngFor="let item of dataReportCelo">
             <ion-label
               >Nombre:
-              <a href="info-palpacion/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToPalpacion(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label
@@ -87,7 +87,7 @@
           <ion-item *ngFor="let item of dataReportCelo">
             <ion-label
               >Nombre:
-              <a href="info-palpacion/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToPalpacion(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label>Veces en Celo: {{ item.count }}</ion-label>
@@ -105,7 +105,7 @@
           <ion-item *ngFor="let item of dataReportServicio">
             <ion-label
               >Nombre:
-              <a href="info-palpacion/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToPalpacion(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label
@@ -122,7 +122,7 @@
           <ion-item *ngFor="let item of dataReportServicio">
             <ion-label
               >Nombre:
-              <a href="info-palpacion/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToPalpacion(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label>Veces Servida: {{ item.count }}</ion-label>
@@ -140,7 +140,7 @@
           <ion-item *ngFor="let item of dataReportPalpacion">
             <ion-label
               >Nombre:
-              <a href="info-palpacion/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToPalpacion(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <!-- <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
@@ -160,7 +160,7 @@
           <ion-item *ngFor="let item of dataReportParto">
             <ion-label
               >Nombre:
-              <a href="info-parto/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToParto(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label
@@ -178,7 +178,7 @@
           <ion-item *ngFor="let item of dataReportParto">
             <ion-label
               >Nombre:
-              <a href="info-parto/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToParto(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label>Veces Parida: {{ item.count }}</ion-label>
@@ -189,7 +189,7 @@
           <ion-item *ngFor="let item of dataReportParto">
             <ion-label
               >Nombre:
-              <a href="info-parto/{{item.id}}"> {{item.nombre}} </a>
+              <a (click)="redirectToParto(item.id)"> {{item.nombre}} </a>
               <ion-icon name="search-outline"></ion-icon>
             </ion-label>
             <ion-label>intervalo entre partos: {{ item.intervalo }}</ion-label>
@@ -221,7 +221,7 @@
           <ion-row *ngFor="let item of dataReportLeche">
             <ion-col>
               <ion-label>
-                <a href="info-mes-leche/{{item.id}}"> {{item.nombre}} </a>
+                <a (click)="redirectToLeche(item.id)"> {{item.nombre}} </a>
                 <ion-icon name="search-outline"></ion-icon>
               </ion-label>
             </ion-col>
