@@ -15,7 +15,9 @@ export class AllReportPage implements OnInit {
   dataReportServicio: any[] = [];
   dataReportPalpacion: any[] = [];
   dataReportLeche: any[] = [];
+
   progress: number = 0;
+  intervalId: any;
 
   public segmentValue: string = 'celo';
   header: string = 'celo';
@@ -23,16 +25,20 @@ export class AllReportPage implements OnInit {
   isLoading = true;
 
   constructor(private http: HttpClient) {
-    setInterval(() => {
-      this.progress += 0.01;
-      if (this.progress > 1) {
-        setTimeout(() => {
-          this.progress = 0;
-          this.getReportCelo();
-          this.isLoading = false;
-        }, 1000);
-      }
-    }, 10);
+    if (this.isLoading === true){
+      this.intervalId = setInterval(() => {
+        this.progress += 0.01;
+        if (this.progress > 1) {
+          setTimeout(() => {
+            this.progress = 0;
+            this.getReportCelo();
+            this.isLoading = false;
+            this.segmentValue = 'celo';
+            clearInterval(this.intervalId); 
+          }, 1000);
+        }
+      }, 10);
+    }
   }
 
   ngOnInit() {
@@ -155,25 +161,26 @@ export class AllReportPage implements OnInit {
       element.intervalo = intervalo[intervalo.length - 1];
     });
 
-    //Eliminar los duplicados
-    this.dataReportParto = this.dataReportParto.filter(
-      (parto, index, self) =>
-        index === self.findIndex((t) => t.nombre === parto.nombre)
-    );
-
+    
     // Ordenar los datos por dias de parto
     this.dataReportParto.sort((a, b) => {
       return a.dias - b.dias;
     });
-
+    
     //Cuantas veces ha estado en parto
     this.dataReportParto.forEach((element) => {
       const count = this.dataReportParto.filter((parto) => {
         return parto.nombre === element.nombre;
       }).length;
-
+      
       element.count = count;
     });
+    
+    //Eliminar los duplicados
+    this.dataReportParto = this.dataReportParto.filter(
+      (parto, index, self) =>
+        index === self.findIndex((t) => t.nombre === parto.nombre)
+    );
   }
 
   getReportServicio() {
@@ -293,26 +300,21 @@ export class AllReportPage implements OnInit {
   }
 
   getReportLeche() {
-    // Filtrar los datos de reportes para obtener solo el nombre y la fecha de leche
+    // Filtrar los datos de reportes para obtener solo el nombre, dias de produccion, produccion de leche y produccionX
     const lecheData = this.reportes.map((animal) => {
-      return animal.lecheMes.map((lecheMes: { lecheXmes: { cantidadLeche: number; mes: number; }[]; fechaSecado: Date; }) => {
+      return animal.comiParto.map((comiParto: any) => {
+        // Specify the type of 'produccionLeche' parameter
         return {
           nombre: animal.nombre,
-          cantidadLeche: lecheMes.lecheXmes.map((lecheXmes: { cantidadLeche: number; mes: number; }) => {
-            return lecheXmes.cantidadLeche;
-          }),
-          mes: lecheMes.lecheXmes.map((lecheXmes: { cantidadLeche: number; mes: number; }) => {
-            return lecheXmes.mes;
-          }),
-          fechaSecado: lecheMes.fechaSecado,
+          diasProduccion: comiParto.diaProduccion,
+          produccionLeche: comiParto.produccionTotal,
+          produccionX: comiParto.produccionX,
         };
       });
     });
 
     // Aplanar el array de arrays
-    const dataReportLeche = [].concat.apply([], lecheData);
-
-
+    this.dataReportLeche = [].concat.apply([], lecheData);
   }
 
   segmentChanged(ev: any) {
@@ -333,6 +335,7 @@ export class AllReportPage implements OnInit {
       this.getReportParto();
       this.getReportServicio();
       this.getReportPalpacion();
+      this.getReportLeche();
     }
   }
 }

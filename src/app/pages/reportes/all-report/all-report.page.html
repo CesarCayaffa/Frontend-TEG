@@ -10,20 +10,16 @@
 <ion-content [fullscreen]="true">
   <app-menu></app-menu>
 
-  <ion-segment 
-  [disabled]="isLoading"
-  value="all"
-  (ionChange)="segmentChanged($event)"
-   >
-   <ion-segment-button value="all" 
-   checked
-  *ngIf="!isLoading && isLoading"
+  <ion-segment
+    [disabled]="isLoading"
+    value="all"
+    (ionChange)="segmentChanged($event)"
+  >
+    <ion-segment-button value="all" checked *ngIf="!isLoading && isLoading">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
 
-   >
-    <ion-label>All</ion-label>
-  </ion-segment-button>
-
-    <ion-segment-button value="celo" >
+    <ion-segment-button value="celo">
       <ion-label>Celos</ion-label>
     </ion-segment-button>
     <ion-segment-button value="servicio">
@@ -35,9 +31,9 @@
     <ion-segment-button value="parto">
       <ion-label>Partos</ion-label>
     </ion-segment-button>
-    <!-- <ion-segment-button value="leche">
+    <ion-segment-button value="leche">
       <ion-label>Producción de leche</ion-label>
-    </ion-segment-button> -->
+    </ion-segment-button>
     <!-- <ion-segment-button >
       <ion-label>Becerros</ion-label>
     </ion-segment-button>
@@ -47,133 +43,165 @@
     <ion-segment-button >
       <ion-label>Vacas</ion-label>
     </ion-segment-button> -->
-
   </ion-segment>
 
-<ion-card *ngIf="segmentValue === 'all'">
-  <ion-card-header>
-    <ion-card-title
-    *ngIf="!isLoading"
-    >Selecciona un tipo de Reporte</ion-card-title>
-  </ion-card-header>
-  <ion-card-header>
-    <ion-card-title
-    *ngIf="isLoading"
-    >Cargando los Reportes</ion-card-title>
-  </ion-card-header>
-  
-  <ion-card-content>
-    <ion-progress-bar 
-    *ngIf="isLoading"
-    [value]="progress"></ion-progress-bar>
-  </ion-card-content>
-  
-
-</ion-card>
-
-
-<div *ngIf="!isLoading">
-
-  <ion-card *ngIf="segmentValue === 'celo'">
+  <ion-card *ngIf="segmentValue === 'all'">
     <ion-card-header>
-      <ion-card-title>Fecha del ultimo Celo </ion-card-title>
+      <ion-card-title *ngIf="!isLoading"
+        >Selecciona un tipo de Reporte</ion-card-title
+      >
     </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportCelo">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Fecha de Celo: {{item.fecha | date:'shortDate'}}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
     <ion-card-header>
-      <ion-card-title>Reporte de Celos</ion-card-title>
+      <ion-card-title *ngIf="isLoading">Cargando los Reportes</ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportCelo">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Veces en Celo: {{ item.count }}</ion-label>
-        </ion-item>
-      </ion-list>
+      <ion-progress-bar *ngIf="isLoading" [value]="progress"></ion-progress-bar>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="segmentValue === 'servicio'">
-    <ion-card-header>
-      <ion-card-title>Fecha del ultimo Servicio</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportServicio">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Fecha de Servicio: {{item.fecha | date:'shortDate'}}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-    <ion-card-header>
-      <ion-card-title>Reporte de Servicios</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportServicio">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Veces Servida: {{ item.count }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="!isLoading">
+    <ion-card *ngIf="segmentValue === 'celo'">
+      <ion-card-header>
+        <ion-card-title>Fecha del ultimo Celo </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportCelo">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label
+              >Fecha de Celo: {{item.fecha | date:'shortDate'}}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Reporte de Celos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportCelo">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label>Veces en Celo: {{ item.count }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card *ngIf="segmentValue === 'palpacion'">
-    <ion-card-header>
-      <ion-card-title>Palpaciones</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportPalpacion">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <!-- <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
+    <ion-card *ngIf="segmentValue === 'servicio'">
+      <ion-card-header>
+        <ion-card-title>Fecha del ultimo Servicio</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportServicio">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label
+              >Fecha de Servicio: {{item.fecha | date:'shortDate'}}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Reporte de Servicios</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportServicio">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label>Veces Servida: {{ item.count }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="segmentValue === 'palpacion'">
+      <ion-card-header>
+        <ion-card-title>Palpaciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportPalpacion">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <!-- <ion-label>Diagnostico: {{item.diagnostico1}}</ion-label>
           <ion-label>Diagnostico: {{item.diagnostico2}}</ion-label> -->
-          <ion-label>Diagnostico: {{item.diagnostico}}</ion-label>
-        </ion-item>
-      </ion-list>
+            <ion-label>Diagnostico: {{item.diagnostico}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
+    <ion-card *ngIf="segmentValue === 'parto'">
+      <ion-card-header>
+        <ion-card-title>Partos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportParto">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label
+              >Fecha de Parto: {{item.fecha | date:'shortDate'}}</ion-label
+            >
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>Reporte de Partos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>Cantidad de Partos</ion-card-subtitle>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportParto">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label>Veces Parida: {{ item.count }}</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-card-subtitle>Intervalo entre Partos</ion-card-subtitle>
+        <ion-list>
+          <ion-item *ngFor="let item of dataReportParto">
+            <ion-label>Nombre: {{item.nombre}}</ion-label>
+            <ion-label>intervalo entre partos: {{ item.intervalo }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngIf="segmentValue === 'parto'">
-    <ion-card-header>
-      <ion-card-title>Partos</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportParto">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Fecha de Parto: {{item.fecha | date:'shortDate'}}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-    <ion-card-header>
-      <ion-card-title>Reporte de Partos</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportParto">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>Veces Parida: {{ item.count }}</ion-label>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-item *ngFor="let item of dataReportParto">
-          <ion-label>Nombre: {{item.nombre}}</ion-label>
-          <ion-label>intervalo entre partos: {{ item.intervalo }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-</div>
-
-
+    <ion-card *ngIf="segmentValue === 'leche'">
+      <ion-card-header>
+        <ion-card-title>Producción de Leche</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="encabezado">
+            <ion-col>
+              <ion-label>Nombre:</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Dias de produccion:</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Producción de Leche:</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Producción por dia:</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let item of dataReportLeche">
+            <ion-col>
+              <ion-label>{{item.nombre ? item.nombre : 'No hay suficiente información aún'}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{item.diasProduccion ? item.diasProduccion : 'No hay suficiente información aún'}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{item.produccionLeche !== null && item.produccionLeche !== undefined ? item.produccionLeche + ' lts' : 'No hay suficiente información aún'}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{item.produccionX !== null && item.produccionX !== undefined ? item.produccionX.toFixed(2) + ' lts' : 'No hay suficiente información aún'}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
