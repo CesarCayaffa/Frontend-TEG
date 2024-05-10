@@ -286,20 +286,41 @@ export class AllReportPage implements OnInit {
     // });
 
     //Cuantas veces ha estado en palpacion
-    // this.dataReportPalpacion.forEach((element) => {
-    //   const count = this.dataReportPalpacion.filter((palpacion) => {
-    //     return palpacion.nombre === element.nombre;
-    //   }).length;
+    this.dataReportPalpacion.forEach((element) => {
+      const count = this.dataReportPalpacion.filter((palpacion) => {
+        return palpacion.nombre === element.nombre;
+      }).length;
 
-    //   element.count = count;
-    // });
+      element.count = count;
+    });
+
+    //Cuantas veces esta Preñada , Aborto y Vacia un animal
+    this.dataReportPalpacion.forEach((element) => {
+      const countPreñada = this.dataReportPalpacion.filter((palpacion) => {  
+        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Preñada';
+      }).length;
+
+      const countAborto = this.dataReportPalpacion.filter((palpacion) => {
+        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Aborto';
+      }).length;
+
+      const countVacia = this.dataReportPalpacion.filter((palpacion) => {
+        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Vacia';
+      }).length;
+
+      element.countPrenada = countPreñada;
+      element.countAborto = countAborto;
+      element.countVacia = countVacia;
+    });
 
     //Eliminar los duplicados
-    // this.dataReportPalpacion = this.dataReportPalpacion.filter((palpacion, index, self) =>
-    //   index === self.findIndex((t) => (
-    //     t.nombre === palpacion.nombre
-    //   ))
-    // );
+    this.dataReportPalpacion = this.dataReportPalpacion.filter((palpacion, index, self) =>
+      index === self.findIndex((t) => (
+        t.nombre === palpacion.nombre
+      ))
+    );
+
+    
     console.log(this.dataReportPalpacion);
   }
 
