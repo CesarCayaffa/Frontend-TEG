@@ -74,6 +74,7 @@ export class AllReportPage implements OnInit {
       return animal.palpaciones.map((palpacion: any) => {
         // Specify the type of 'palpacion' parameter
         return {
+          id: animal._id,
           nombre: animal.nombre,
           fecha: palpacion.fechaCelo,
         };
@@ -119,6 +120,7 @@ export class AllReportPage implements OnInit {
       return animal.comiParto.map((comiParto: any) => {
         // Specify the type of 'palpacion' parameter
         return {
+          id: animal._id,
           nombre: animal.nombre,
           fecha: comiParto.fechaParto,
         };
@@ -175,7 +177,7 @@ export class AllReportPage implements OnInit {
       
       element.count = count;
     });
-    
+
     //Eliminar los duplicados
     this.dataReportParto = this.dataReportParto.filter(
       (parto, index, self) =>
@@ -189,6 +191,7 @@ export class AllReportPage implements OnInit {
       return animal.palpaciones.map((palpacion: any) => {
         // Specify the type of 'servicio' parameter
         return {
+          id: animal._id,
           nombre: animal.nombre,
           fecha: palpacion.fechaServicio,
         };
@@ -236,6 +239,7 @@ export class AllReportPage implements OnInit {
       return animal.palpaciones.map((palpacion: any) => {
         // Specify the type of 'palpacion' parameter
         return {
+          id: animal._id,
           nombre: animal.nombre,
           diagnostico1: palpacion.diagnostico1,
           diagnostico2: palpacion.diagnostico2,
@@ -305,6 +309,7 @@ export class AllReportPage implements OnInit {
       return animal.comiParto.map((comiParto: any) => {
         // Specify the type of 'produccionLeche' parameter
         return {
+          id: animal._id,
           nombre: animal.nombre,
           diasProduccion: comiParto.diaProduccion,
           produccionLeche: comiParto.produccionTotal,
