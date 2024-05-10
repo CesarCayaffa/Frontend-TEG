@@ -14,4 +14,21 @@
   ion-chip {
     color: rgb(255, 255, 255);
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    margin: 5px;
+  }
+
+  ion-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  }
+
+  .tittle{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
