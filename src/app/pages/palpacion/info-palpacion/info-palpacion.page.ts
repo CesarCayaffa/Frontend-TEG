@@ -43,36 +43,36 @@ export class InfoPalpacionPage implements OnInit {
   updatePalpacion(palpacionId: string) {
     this.router.navigate(['/update-palpacion', this.animalId, palpacionId]);
   }
-  deletePalpacion(palpacionId: string) {
+  // deletePalpacion(palpacionId: string) {
 
-    console.log(palpacionId)
+  //   console.log(palpacionId)
 
-    this.alertController
-      .create({
-        header: 'Eliminar',
-        message: '¿Estás seguro de que deseas eliminar esta palpación?',
-        buttons: [
-          {
-            text: 'Cancelar',
-            role: 'cancel',
-          },
-          {
-            text: 'Eliminar',
-            handler: () => {
-              const url = `${this.baseUrl}/deletePalpacion/${this.animalId}/${palpacionId}`;
-              this.http.patch(url, {}).subscribe(() => {
-                this.getAnimalById(this.animalId).subscribe((animal) => {
-                  this.animal = animal;
-                });
-              });
-            },
-          },
-        ],
-      })
-      .then((alert) => {
-        alert.present();
-      });
-  }
+  //   this.alertController
+  //     .create({
+  //       header: 'Eliminar',
+  //       message: '¿Estás seguro de que deseas eliminar esta palpación?',
+  //       buttons: [
+  //         {
+  //           text: 'Cancelar',
+  //           role: 'cancel',
+  //         },
+  //         {
+  //           text: 'Eliminar',
+  //           handler: () => {
+  //             const url = `${this.baseUrl}/deletePalpacion/${this.animalId}/${palpacionId}`;
+  //             this.http.patch(url, {}).subscribe(() => {
+  //               this.getAnimalById(this.animalId).subscribe((animal) => {
+  //                 this.animal = animal;
+  //               });
+  //             });
+  //           },
+  //         },
+  //       ],
+  //     })
+  //     .then((alert) => {
+  //       alert.present();
+  //     });
+  // }
 
   retroceder() {
     this.router.navigate(['/info-vaca', this.animalId]);

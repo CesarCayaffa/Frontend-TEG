@@ -7,67 +7,81 @@
       >Info de Palpacion de:
       <span class="name"> {{ animal?.nombre }} </span>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addPalpacion(animal.id)">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button expand="full" (click)="addPalpacion(animal.id)">
+  <!-- <ion-button expand="full" (click)="addPalpacion(animal.id)">
     <ion-icon slot="start" name="add"></ion-icon>
     Agregar Palpación
-  </ion-button>
+  </ion-button> -->
 
   <ion-list *ngIf="animal?.palpaciones && animal.palpaciones.length > 0">
     <ion-list-header>Info de Palpaciones:</ion-list-header>
     <ion-grid>
       <ion-row>
         <ion-col>Fecha de celo</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.fechaCelo | date:'dd-MM-yyyy'}}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.fechaCelo | date:'dd-MM-yyyy' }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Fecha de servicio</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.fechaServicio | date:'dd-MM-yyyy'}}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.fechaServicio | date:'dd-MM-yyyy' }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Toro</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.toro }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.toro }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Fecha de palpación</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.fechaPalpacion1 | date:'dd-MM-yyyy' }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.fechaPalpacion1 | date:'dd-MM-yyyy' }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Diagnóstico</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.diagnostico1 }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.diagnostico1 }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Fecha de palpación</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.fechaPalpacion2 | date:'dd-MM-yyyy' }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.fechaPalpacion2 | date:'dd-MM-yyyy' }}</ion-col></a
         >
       </ion-row>
+
       <ion-row>
         <ion-col>Diagnóstico</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.diagnostico2 }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.diagnostico2 }}</ion-col></a
         >
       </ion-row>
-      <ion-row>
+
+      <!-- Observaciones -->
+      <!-- <ion-row>
         <ion-col>Observaciones</ion-col>
-        <ion-col *ngFor="let palpacion of animal.palpaciones"
-          >{{ palpacion.observaciones }}</ion-col
+        <a *ngFor="let palpacion of animal.palpaciones" (click)="updatePalpacion(palpacion._id)"
+          ><ion-col>{{ palpacion.observaciones }}</ion-col></a
         >
-      </ion-row>
-      <ion-row>
+      </ion-row> -->
+
+      <!-- <ion-row>
         <ion-col>Acciones</ion-col>
         <ion-col *ngFor="let palpacion of animal.palpaciones">
           <ion-button color="primary" (click)="updatePalpacion(palpacion._id)">
@@ -77,7 +91,7 @@
             <ion-icon name="trash"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
   </ion-list>
 

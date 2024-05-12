@@ -3,18 +3,40 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="redirectInfoVaca()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Editar Palpacion</ion-title>
+    <ion-title
+    *ngIf="showInfo"
+    >Editar Palpacion</ion-title>
+    <ion-title
+    *ngIf="!showInfo"
+    >Info de Palpacion</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleInfo()" *ngIf="!showInfo">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        color="danger"
+        *ngIf="!showInfo"
+        (click)="deletePalpacion(palpacion.id)"
+      >
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="toggleInfo()" *ngIf="showInfo">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Editar Palpacion</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <form (ngSubmit)="updatePalpacion()">
+  <form (ngSubmit)="updatePalpacion()"
+  *ngIf="showInfo"
+  >
     <ion-item lines="none">
       <ion-label position="stacked">Fecha de Celo</ion-label>
       <ion-buttons slot="end">
@@ -97,5 +119,54 @@
 
     <ion-button class="form-button" type="submit">Actualizar Palpacion</ion-button>
   </form>
+
+  <ion-card *ngIf="!showInfo">
+    <ion-card-header>
+      <ion-card-title>Palpacion</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Fecha de Celo</ion-label>
+          <ion-label>{{ palpacion.fechaCelo | date:'dd-MM-yyyy' }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fecha de Servicio</ion-label>
+          <ion-label>{{ palpacion.fechaServicio | date:'dd-MM-yyyy' }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Toro</ion-label>
+          <ion-label>{{ palpacion.toro }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fecha de Palpacion 1</ion-label>
+          <ion-label>{{ palpacion.fechaPalpacion1 | date:'dd-MM-yyyy' }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Diagnostico 1</ion-label>
+          <ion-label>{{ palpacion.diagnostico1 }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Fecha de Palpacion 2</ion-label>
+          <ion-label>{{ palpacion.fechaPalpacion2 | date:'dd-MM-yyyy' }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Diagnostico 2</ion-label>
+          <ion-label>{{ palpacion.diagnostico2 }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Observaciones</ion-label>
+          <ion-label>{{ palpacion.observaciones }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
