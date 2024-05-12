@@ -23,8 +23,8 @@
       required></ion-datetime>
     </ion-item>
 
-    <ion-item lines="none">
-      <ion-label position="stacked">Fecha de Servicio</ion-label>
+    <!-- <ion-item lines="none">
+      <ion-label position="stacked">Fecha de Servicio</ion-label> -->
       <!-- <ion-buttons slot="end">
         <ion-button fill="clear" (click)="toggleCalendar()">
           <ion-icon slot="icon-only" name="calendar"></ion-icon>
@@ -32,15 +32,32 @@
       </ion-buttons>
       <ion-datetime *ngIf="showCalendar" displayFormat="DD/MM/YYYY" [(ngModel)]="palpacion.fechaServicio"
         name="fechaServicio" required></ion-datetime> -->
-    </ion-item>
-    <ion-item>
+    <!-- </ion-item> -->
+    <!-- <ion-item>
       <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="palpacion.fechaServicio" name="fechaServicio"
         required></ion-datetime>
-    </ion-item>
-
+    </ion-item> -->
     <ion-item>
-      <ion-label position="floating">Toro</ion-label>
-      <ion-input [(ngModel)]="palpacion.toro" name="toro" required></ion-input>
+      <ion-label
+      *ngIf="!showCalendar"
+      >Fecha de Servicio:</ion-label>
+      <ion-buttons slot="end">
+        <ion-button 
+        *ngIf="!showCalendar"
+        fill="clear" (click)="toggleCalendar()">
+          <ion-icon slot="icon-only" name="calendar"></ion-icon>
+        </ion-button>
+        <ion-button
+        *ngIf="showCalendar"
+        fill="clear" (click)="toggleCalendar()"
+        >
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-datetime  [showDefaultTitle]="true" *ngIf="showCalendar" presentation="date" displayFormat="DD-MM-YYYY" [(ngModel)]="palpacion.fechaServicio" name="fechaServicio" required>
+        <span slot="title">Fecha de Servicio</span>
+      </ion-datetime>
+      <ion-label *ngIf="!showCalendar">{{ palpacion.fechaServicio | date:'dd-MM-YYYY' }}</ion-label>
     </ion-item>
 
     <ion-item lines="none">

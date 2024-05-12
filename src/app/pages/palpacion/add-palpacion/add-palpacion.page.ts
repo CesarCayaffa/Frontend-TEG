@@ -43,4 +43,9 @@ export class AddPalpacionPage implements OnInit {
   }
 
 
+  showCalendar = false;
+  toggleCalendar() {
+    this.showCalendar = !this.showCalendar;
+  }
+
 }
