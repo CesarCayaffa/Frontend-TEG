@@ -57,4 +57,10 @@ export class ActualizarVacaPage implements OnInit {
   redirectToInfoVaca() {
     this.router.navigate(['/info-vaca', this.animal.id]);
   }
+
+  showCalendar=false;
+
+  toggleCalendar() {
+    this.showCalendar = !this.showCalendar;
+  }
 }
