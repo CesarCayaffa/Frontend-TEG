@@ -15,55 +15,75 @@
   </ion-header>
 
   <form (ngSubmit)="addLecheMes()">
-
     <ion-item>
-      <ion-label>ID del parto</ion-label>
+      <ion-label> Selecciona el Parto </ion-label>
+      
       <ion-select [(ngModel)]="lecheMes.idComiParto">
-        <ion-select-option *ngFor="let comiParto of comiPartos" [value]="comiParto._id">
-          Parto:
-          {{ comiParto._id }}
+        <ion-select-option
+          *ngFor="let comiParto of comiPartos"
+          [value]="comiParto._id"
+        >
+          Parto: {{ comiParto.fechaParto | date:'dd-MM-YYYY' }}
         </ion-select-option>
       </ion-select>
     </ion-item>
 
-    <!-- <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
-      <ion-item>
-        <ion-label position="floating">Mes {{i + 1}}</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.mes" name="mes{{i}}" [required]="i === 0"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="floating">Cantidad de Leche</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.cantidadLeche" name="cantidadLeche{{i}}" [required]="i === 0"></ion-input>
-      </ion-item>
-    </ion-item> -->
-
-        <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
-      <ion-item>
-        <ion-label position="floating">Mes {{i + 1}}</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.mes" name="mes{{i + 1}}" [required]="i === 0"></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label position="floating">Cantidad de Leche</ion-label>
-        <ion-input type="number" [(ngModel)]="leche.cantidadLeche" name="cantidadLeche{{i + 1}}" [required]="i === 0"></ion-input>
-      </ion-item>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label position="stacked">Fecha de Secado</ion-label>
+    <ion-item>
+      <ion-label *ngIf="!showCalendar">Fecha de Secado:</ion-label>
       <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="toggleCalendar()">
+        <ion-button
+          *ngIf="!showCalendar"
+          fill="clear"
+          (click)="toggleCalendar()"
+        >
           <ion-icon slot="icon-only" name="calendar"></ion-icon>
         </ion-button>
+        <ion-button
+          *ngIf="showCalendar"
+          fill="clear"
+          (click)="toggleCalendar()"
+        >
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+        </ion-button>
       </ion-buttons>
+      <ion-datetime
+        [showDefaultTitle]="true"
+        *ngIf="showCalendar"
+        presentation="date"
+        displayFormat="DD-MM-YYYY"
+        [(ngModel)]="lecheMes.fechaSecado"
+        name="fechaSecado"
+        required
+      >
+        <span slot="title">Fecha de Secado</span>
+      </ion-datetime>
+      <ion-label *ngIf="!showCalendar"
+        >{{ lecheMes.fechaSecado | date:'dd-MM-YYYY' }}</ion-label
+      >
     </ion-item>
-    <ion-item>
-      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="lecheMes.fechaSecado" name="fechaSecado"
-        required></ion-datetime>
+
+    <ion-item *ngFor="let leche of lecheMes.lecheXmes; let i = index">
+      <ion-item>
+        <ion-label position="floating">Mes {{i + 1}}</ion-label>
+        <ion-input
+          type="number"
+          [(ngModel)]="leche.mes"
+          name="mes{{i + 1}}"
+          [required]="i === 0"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Cantidad de Leche</ion-label>
+        <ion-input
+          type="number"
+          [(ngModel)]="leche.cantidadLeche"
+          name="cantidadLeche{{i + 1}}"
+          [required]="i === 0"
+        ></ion-input>
+      </ion-item>
     </ion-item>
 
     <ion-button class="form-button" type="submit">Agregar Leche Mes</ion-button>
   </form>
-
 </ion-content>

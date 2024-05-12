@@ -10,10 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AddMesLechePage implements OnInit {
   lecheMes = {
     idComiParto: '',
-    // lecheXmes: [{ mes: '', cantidadLeche: '' },],
-    // lecheXmes: Array(12).fill({ mes: '', cantidadLeche: '' }),
-    // lecheXmes: [],
-    
+ 
     lecheXmes: Array<{ mes: string, cantidadLeche: string }>(0),
 
     fechaSecado: ''
@@ -47,9 +44,9 @@ export class AddMesLechePage implements OnInit {
   getVaca() {
     const url = `${this.baseUrl}/${this.id}`;
     this.http.get(url).subscribe((res: any) => {
-      this.comiPartos = res.comiParto; // Asume que la respuesta tiene una propiedad comiParto que es un array
+      this.comiPartos = res.comiParto; 
       this.comiPartos.forEach(comiParto => {
-        console.log(comiParto._id); // Imprime el _id de cada comiParto
+        console.log(comiParto._id); 
       });
     });
   }
