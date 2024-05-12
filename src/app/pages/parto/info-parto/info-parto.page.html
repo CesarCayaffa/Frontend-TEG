@@ -39,11 +39,11 @@
       </ion-row>
 
       <ion-row>
-        <ion-col>Peso del becerro (Kg)</ion-col>
+        <ion-col>Peso del becerro</ion-col>
         <a
           *ngFor="let comiParto of animal.comiParto"
           (click)="updateParto(comiParto._id)"
-          ><ion-col>{{ comiParto.pesoBecerroKg }}</ion-col></a
+          ><ion-col>{{ comiParto.pesoBecerroKg }} Kg</ion-col></a
         >
       </ion-row>
 
