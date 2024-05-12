@@ -106,4 +106,24 @@ export class UpdatePalpacionPage implements OnInit {
         alert.present();
       });
   }
+
+  showCalendarCelo = false;
+  toggleCalendarCelo() {
+    this.showCalendarCelo = !this.showCalendarCelo;
+  }
+
+  showCalendarServicio = false;
+  toggleCalendarServicio() {
+    this.showCalendarServicio = !this.showCalendarServicio;
+  }
+
+  showCalendarPalpacion1 = false;
+  toggleCalendarPalpacion1() {
+    this.showCalendarPalpacion1 = !this.showCalendarPalpacion1;
+  }
+
+  showCalendarPalpacion2 = false;
+  toggleCalendarPalpacion2() {
+    this.showCalendarPalpacion2 = !this.showCalendarPalpacion2;
+  }
 }
