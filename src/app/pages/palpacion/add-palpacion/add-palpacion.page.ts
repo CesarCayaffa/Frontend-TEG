@@ -16,14 +16,16 @@ export class AddPalpacionPage implements OnInit {
     diagnostico1: '',
     fechaPalpacion2: '',
     diagnostico2: '',
-    observaciones: ''
+    observaciones: '',
   };
   id: any;
   baseUrl = 'https://backend-teg.up.railway.app/animals';
 
-
-
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -33,19 +35,33 @@ export class AddPalpacionPage implements OnInit {
     const url = `${this.baseUrl}/addPalpacion/${this.id}`;
     this.http.patch(url, this.palpacion).subscribe(() => {
       this.redirectInfoVaca();
-    }
-    );
+    });
   }
-
 
   redirectInfoVaca() {
-    this.router.navigate(['/info-palpacion', this.route.snapshot.paramMap.get('id')]);
+    this.router.navigate([
+      '/info-palpacion',
+      this.route.snapshot.paramMap.get('id'),
+    ]);
   }
 
-
-  showCalendar = false;
-  toggleCalendar() {
-    this.showCalendar = !this.showCalendar;
+  showCalendarCelo = false;
+  toggleCalendarCelo() {
+    this.showCalendarCelo = !this.showCalendarCelo;
   }
 
+  showCalendarServicio = false;
+  toggleCalendarServicio() {
+    this.showCalendarServicio = !this.showCalendarServicio;
+  }
+
+  showCalendarPalpacion1 = false;
+  toggleCalendarPalpacion1() {
+    this.showCalendarPalpacion1 = !this.showCalendarPalpacion1;
+  }
+
+  showCalendarPalpacion2 = false;
+  toggleCalendarPalpacion2() {
+    this.showCalendarPalpacion2 = !this.showCalendarPalpacion2;
+  }
 }
