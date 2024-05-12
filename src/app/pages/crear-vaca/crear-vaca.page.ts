@@ -72,5 +72,9 @@ export class CrearVacaPage implements OnInit {
     this.router.navigate(['/lista-vacas']);
   }
 
+  showCalendar = false;
+  toggleCalendar() {
+    this.showCalendar = !this.showCalendar;
+  }
   
 }
