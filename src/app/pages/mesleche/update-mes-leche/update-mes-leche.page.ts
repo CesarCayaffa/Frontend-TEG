@@ -24,7 +24,6 @@ export class UpdateMesLechePage implements OnInit {
   baseUrl = 'https://backend-teg.up.railway.app/animals';
   animal: any;
 
-  public showCalendar: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -60,9 +59,7 @@ export class UpdateMesLechePage implements OnInit {
     this.router.navigate(['/info-mes-leche', this.animalId]);
   }
 
-  toggleCalendar() {
-    this.showCalendar = !this.showCalendar;
-  }
+
 
   public showLecheMes: boolean = false;
 
@@ -105,5 +102,11 @@ export class UpdateMesLechePage implements OnInit {
         alert.present();
       });
 
+  }
+
+  showCalendar = false;
+
+  toggleCalendar() {
+    this.showCalendar = !this.showCalendar;
   }
 }
