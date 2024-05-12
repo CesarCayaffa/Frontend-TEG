@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-palpacion',
@@ -36,6 +37,12 @@ export class AddPalpacionPage implements OnInit {
     this.http.patch(url, this.palpacion).subscribe(() => {
       this.redirectInfoVaca();
     });
+    this.getAnimalById(this.id)
+  }
+
+ getAnimalById(id: string): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get(url);
   }
 
   redirectInfoVaca() {

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-info-palpacion',
@@ -18,7 +17,6 @@ export class InfoPalpacionPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private alertController: AlertController,
     private router: Router
   ) {}
 
@@ -32,10 +30,10 @@ export class InfoPalpacionPage implements OnInit {
     }
   }
 
-  getAnimalById(id: string): Observable<any> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.get(url);
-  }
+  // getAnimalById(id: string): Observable<any> {
+  //   const url = `${this.baseUrl}/${id}`;
+  //   return this.http.get(url);
+  // }
 
   addPalpacion(id: string) {
     this.router.navigate(['/add-palpacion', this.animalId]);
@@ -43,36 +41,6 @@ export class InfoPalpacionPage implements OnInit {
   updatePalpacion(palpacionId: string) {
     this.router.navigate(['/update-palpacion', this.animalId, palpacionId]);
   }
-  // deletePalpacion(palpacionId: string) {
-
-  //   console.log(palpacionId)
-
-  //   this.alertController
-  //     .create({
-  //       header: 'Eliminar',
-  //       message: '¿Estás seguro de que deseas eliminar esta palpación?',
-  //       buttons: [
-  //         {
-  //           text: 'Cancelar',
-  //           role: 'cancel',
-  //         },
-  //         {
-  //           text: 'Eliminar',
-  //           handler: () => {
-  //             const url = `${this.baseUrl}/deletePalpacion/${this.animalId}/${palpacionId}`;
-  //             this.http.patch(url, {}).subscribe(() => {
-  //               this.getAnimalById(this.animalId).subscribe((animal) => {
-  //                 this.animal = animal;
-  //               });
-  //             });
-  //           },
-  //         },
-  //       ],
-  //     })
-  //     .then((alert) => {
-  //       alert.present();
-  //     });
-  // }
 
   retroceder() {
     this.router.navigate(['/info-vaca', this.animalId]);

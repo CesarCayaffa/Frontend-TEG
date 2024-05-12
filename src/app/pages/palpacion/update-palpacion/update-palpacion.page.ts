@@ -54,6 +54,7 @@ export class UpdatePalpacionPage implements OnInit {
     this.http.patch(url, this.palpacion).subscribe(() => {
       this.redirectInfoVaca();
     });
+    this.getAnimalById(this.animalId);
   }
 
   redirectInfoVaca() {
