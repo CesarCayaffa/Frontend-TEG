@@ -1,36 +1,74 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="redirectInfoVaca()" ></ion-back-button>
+      <ion-back-button (click)="redirectInfoVaca()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Editar Parto</ion-title>
+    <ion-title *ngIf="showInfo">Editar Parto</ion-title>
+    <ion-title *ngIf="!showInfo">Info de Parto</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleInfo()" *ngIf="!showInfo">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        color="danger"
+        *ngIf="!showInfo"
+        (click)="deleteParto(partoId)"
+      >
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="toggleInfo()" *ngIf="showInfo">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Editar parto</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <form (ngSubmit)="updateParto()">
-    <ion-item lines="none">
-      <ion-label position="stacked">Fecha de Parto</ion-label>
+  <form *ngIf="showInfo" (ngSubmit)="updateParto()">
+    <ion-item>
+      <ion-label *ngIf="!showCalendar">Fecha de Parto:</ion-label>
       <ion-buttons slot="end">
-        <ion-button fill="clear" (click)="toggleCalendar()">
+        <ion-button
+          *ngIf="!showCalendar"
+          fill="clear"
+          (click)="toggleCalendar()"
+        >
           <ion-icon slot="icon-only" name="calendar"></ion-icon>
         </ion-button>
+        <ion-button
+          *ngIf="showCalendar"
+          fill="clear"
+          (click)="toggleCalendar()"
+        >
+          <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+        </ion-button>
       </ion-buttons>
-    </ion-item>
-    <ion-item>
-      <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="comiParto.fechaParto" name="fechaParto"
-        required></ion-datetime>
+      <ion-datetime
+        [showDefaultTitle]="true"
+        *ngIf="showCalendar"
+        presentation="date"
+        displayFormat="DD-MM-YYYY"
+        [(ngModel)]="comiParto.fechaParto"
+        name="fechaParto"
+        required
+      >
+        <span slot="title">Fecha de Parto</span>
+      </ion-datetime>
+      <ion-label *ngIf="!showCalendar"
+        >{{ comiParto.fechaParto | date:'dd-MM-YYYY' }}</ion-label
+      >
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Sexo del Becerro</ion-label>
-      <ion-select [(ngModel)]="comiParto.sexoBecerro" name="sexoBecerro" required>
+      <ion-label>Sexo del Becerro</ion-label>
+      <ion-select
+        [(ngModel)]="comiParto.sexoBecerro"
+        name="sexoBecerro"
+        required
+      >
         <ion-select-option value="Masculino">Masculino</ion-select-option>
         <ion-select-option value="Femenino">Femenino</ion-select-option>
       </ion-select>
@@ -38,16 +76,48 @@
 
     <ion-item>
       <ion-label position="floating">Peso del Becerro (Kg)</ion-label>
-      <ion-input type="number" [(ngModel)]="comiParto.pesoBecerroKg" name="pesoBecerroKg" required></ion-input>
+      <ion-input
+        type="number"
+        [(ngModel)]="comiParto.pesoBecerroKg"
+        name="pesoBecerroKg"
+        required
+      ></ion-input>
     </ion-item>
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Observaciones</ion-label>
       <ion-textarea [(ngModel)]="comiParto.observacion" name="observacion"></ion-textarea>
-    </ion-item>
+    </ion-item> -->
 
     <ion-button class="form-button" type="submit">Actualizar Parto</ion-button>
   </form>
 
+  <ion-card *ngIf="!showInfo">
+    <ion-card-header>
+      <ion-card-title>Parto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Fecha de Parto</ion-label>
+          <ion-label>{{ comiParto.fechaParto | date:'dd-MM-yyyy' }}</ion-label>
+        </ion-item>
 
+        <ion-item>
+          <ion-label>Sexo del Becerro</ion-label>
+          <ion-label>{{ comiParto.sexoBecerro }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Peso del Becerro (Kg)</ion-label>
+          <ion-label>{{ comiParto.pesoBecerroKg }}</ion-label>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label>Observaciones</ion-label>
+          <ion-label>{{ comiParto.observacion }}</ion-label>
+        </ion-item> -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
