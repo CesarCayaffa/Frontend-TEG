@@ -60,7 +60,14 @@
       </a>
       <a [routerLink]="['/info-vaca', animal.id]">
         <ion-label>
-          <h2>Nombre: {{ animal.nombre }} No.{{ animal.numero }}</h2>
+          <h2>Nombre: {{ animal.nombre }} No.{{ animal.numero }}
+            <!-- <ion-badge color="primary" *ngIf="animal.esBecerro">Becerro</ion-badge> -->
+            <ion-badge color="primary">
+              {{animal.puntuacion | number:'1.2-2'}}
+              <ion-icon name="star"></ion-icon>
+            </ion-badge>
+
+          </h2>
           <p>Raza: {{ animal.raza }}</p>
           <!-- <p>Sexo: {{animal.sexo }}</p> -->
           <p>
