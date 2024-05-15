@@ -14,8 +14,9 @@ export class ProfilePage implements OnInit {
   isDarkTheme: Observable<boolean>;
   darkMode: boolean = false;
   animal = {
-    edadBecerro: 3,
+    edadBecerro: 0,
   }
+  nuevaEdadBecerro: number = 0;
 
   constructor(private router: Router, private themeService: ThemeService, private http: HttpClient) { 
     this.isDarkTheme = this.themeService.isDarkTheme;
@@ -33,6 +34,8 @@ export class ProfilePage implements OnInit {
       this.http.get('https://backend-teg.up.railway.app/users/me', { headers }).subscribe(
         (user: any) => {
           this.username = user.name; 
+          this.animal.edadBecerro = user.edadBecerro;
+          this.nuevaEdadBecerro = this.animal.edadBecerro;
         },
         error => {
           console.error(error);
@@ -55,4 +58,26 @@ export class ProfilePage implements OnInit {
     const token = localStorage.getItem('token');
     console.log(token);
   }
+
+  actualizarEdadBecerro(nuevaEdadBecerro: number) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = { 'auth-token': token };
+      this.http.patch('https://backend-teg.up.railway.app/users/updateEdadBecerro', { nuevaEdadBecerro }, { headers }).subscribe(
+        (user: any) => {
+          this.animal.edadBecerro = nuevaEdadBecerro;
+          this.toggleEditEdadBecerro();
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  showEditEdadBecerro = false;
+  toggleEditEdadBecerro() {
+    this.showEditEdadBecerro = !this.showEditEdadBecerro;
+  }
+
 }

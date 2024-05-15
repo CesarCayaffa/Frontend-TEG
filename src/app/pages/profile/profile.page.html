@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
-    
+
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,7 +16,7 @@
   </ion-header>
 
   <app-menu></app-menu>
-  
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Hola, {{username}}</ion-card-title>
@@ -25,23 +25,48 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>
-        Preferencias
-      </ion-card-title>
+      <ion-card-title> Preferencias </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-label>Edad a que una vaca/toro se convierte en adulta: (default: {{ animal.edadBecerro }})</ion-label>
+      <ion-item *ngIf="!showEditEdadBecerro">
+        <ion-label
+          >Edad para pasar a adulta: {{ animal.edadBecerro }} años
+          <ion-icon
+          style="padding-left: 20px;"
+            name="create"
+            slot="icon-only"
+            (click)="toggleEditEdadBecerro()"
+          ></ion-icon>
+        </ion-label>
       </ion-item>
+      <ion-item *ngIf="showEditEdadBecerro">
+        <ion-label      
+        >Actualizar Edad Becerro:
+        <ion-button (click)="actualizarEdadBecerro(nuevaEdadBecerro)">
+          <ion-icon name="save" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button (click)="toggleEditEdadBecerro()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-label>
+      </ion-item>
+      <ion-item
+      *ngIf="showEditEdadBecerro"
+      >
+      <ion-input type="number" [(ngModel)]="nuevaEdadBecerro"></ion-input>
+
+      </ion-item>
+      
+
       <ion-item>
         <ion-label>Modo oscuro</ion-label>
-        <ion-toggle [(ngModel)]="darkMode" (ionChange)="toggleDarkTheme($event)"></ion-toggle>
+        <ion-toggle
+          [(ngModel)]="darkMode"
+          (ionChange)="toggleDarkTheme($event)"
+        ></ion-toggle>
       </ion-item>
-
-
     </ion-card-content>
   </ion-card>
-
 
   <ion-button expand="full" (click)="logout()">Cerrar sesión</ion-button>
 </ion-content>
