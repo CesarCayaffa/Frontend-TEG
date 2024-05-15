@@ -19,6 +19,8 @@ export class ListaVacasPage implements OnInit {
   filterSexo = '';
   filterEtapa = '';
 
+  isLoading = true;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -41,6 +43,7 @@ export class ListaVacasPage implements OnInit {
   
       }));
       this.filteredAnimals = this.animals;
+      this.isLoading = false;
     });
   }
 

@@ -1,35 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button 
-      *ngIf="!showSearchBar"
-      autoHide="false"></ion-menu-button>
+      <ion-menu-button
+        *ngIf="!showSearchBar"
+        autoHide="false"
+      ></ion-menu-button>
     </ion-buttons>
-    <ion-title
-    *ngIf="!showSearchBar"
-    >Lista de animales</ion-title>
-    <ion-searchbar *ngIf="showSearchBar"
+    <ion-title *ngIf="!showSearchBar">Lista de animales</ion-title>
+    <ion-searchbar
+      *ngIf="showSearchBar"
       [(ngModel)]="searchTerm"
       (ionInput)="filterAnimals()"
       placeholder="Buscar por nombre o número "
     ></ion-searchbar>
- 
-    
+
     <ion-buttons slot="end">
-        <ion-button
-        (click)="toggleSearchBar()"
-        >
+      <ion-button (click)="toggleSearchBar()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
-      
-          <ion-button
-          class="setting"
-          *ngIf="!showSearchBar"
-           slot="end" (click)="presentActionSheet()">
-            <ion-icon name="options-outline"></ion-icon>
-          </ion-button>
 
-
+      <ion-button
+        class="setting"
+        *ngIf="!showSearchBar"
+        slot="end"
+        (click)="presentActionSheet()"
+      >
+        <ion-icon name="options-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -41,9 +38,9 @@
 
   <app-menu></app-menu>
 
-
-
-  <ion-list>
+  <ion-list *ngIf="!isLoading 
+  && filteredAnimals.length > 0
+  ">
     <ion-item *ngFor="let animal of filteredAnimals">
       <a [routerLink]="['/info-vaca', animal.id]">
         <div class="avatar">
@@ -60,13 +57,13 @@
       </a>
       <a [routerLink]="['/info-vaca', animal.id]">
         <ion-label>
-          <h2>Nombre: {{ animal.nombre }} No.{{ animal.numero }}
+          <h2>
+            Nombre: {{ animal.nombre }} No.{{ animal.numero }}
             <!-- <ion-badge color="primary" *ngIf="animal.esBecerro">Becerro</ion-badge> -->
             <ion-badge color="primary">
               {{animal.puntuacion | number:'1.2-2'}}
               <ion-icon name="star"></ion-icon>
             </ion-badge>
-
           </h2>
           <p>Raza: {{ animal.raza }}</p>
           <!-- <p>Sexo: {{animal.sexo }}</p> -->
@@ -78,6 +75,24 @@
       </a>
     </ion-item>
   </ion-list>
+
+  <ion-list *ngIf="isLoading">
+    <ion-item>
+      <ion-label>
+        <ion-spinner name="crescent"></ion-spinner>
+        Cargando animales...
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!isLoading && filteredAnimals.length === 0">
+    <ion-item>
+      <ion-label>
+          No se encontraron animales.
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button size="small" [routerLink]="['/crear-vaca']">
       <ion-icon name="add"></ion-icon>
