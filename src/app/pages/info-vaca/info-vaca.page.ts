@@ -6,6 +6,7 @@ import { RefresherEventDetail } from '@ionic/core';
 import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-info-vaca',
@@ -26,7 +27,8 @@ export class InfoVacaPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private alertController: AlertController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

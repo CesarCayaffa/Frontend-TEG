@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-add-parto',
@@ -15,14 +16,19 @@ export class AddPartoPage implements OnInit {
     diaProduccion: '',
     produccionTotal: '',
     produccionX: '',
-    observacion: ''
+    observacion: '',
   };
   id: any;
   baseUrl = 'https://backend-teg.up.railway.app/animals';
 
   public showCalendar: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -32,16 +38,17 @@ export class AddPartoPage implements OnInit {
     const url = `${this.baseUrl}/addParto/${this.id}`;
     this.http.patch(url, this.comiParto).subscribe(() => {
       this.redirecInfoVaca();
-    }
-    );
+    });
   }
 
   redirecInfoVaca() {
-    this.router.navigate(['/info-parto', this.route.snapshot.paramMap.get('id')]);
+    this.router.navigate([
+      '/info-parto',
+      this.route.snapshot.paramMap.get('id'),
+    ]);
   }
 
   toggleCalendar() {
     this.showCalendar = !this.showCalendar;
   }
-
 }

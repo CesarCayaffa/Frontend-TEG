@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-crear-vaca',
@@ -20,7 +21,7 @@ export class CrearVacaPage implements OnInit {
     nombrePadre: '',
     numeroPadre: null,
     nombreMadre: '',
-    numeroMadre: null
+    numeroMadre: null,
   };
 
   animals: any[] = [];
@@ -28,9 +29,11 @@ export class CrearVacaPage implements OnInit {
   useExistingPadre = true;
   useExistingMadre = true;
 
- 
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit() {
     this.getAnimals().subscribe((data) => {
@@ -40,7 +43,7 @@ export class CrearVacaPage implements OnInit {
 
   getAnimals(): Observable<any> {
     const url = 'https://backend-teg.up.railway.app/animals/';
-    const token = localStorage.getItem('token');  
+    const token = localStorage.getItem('token');
 
     if (!token) {
       throw new Error('Token not found');
@@ -53,7 +56,7 @@ export class CrearVacaPage implements OnInit {
 
   onSubmit() {
     const url = 'https://backend-teg.up.railway.app/animals/';
-    const token = localStorage.getItem('token');  
+    const token = localStorage.getItem('token');
 
     if (!token) {
       throw new Error('Token not found');
@@ -61,9 +64,9 @@ export class CrearVacaPage implements OnInit {
 
     const headers = new HttpHeaders().set('auth-token', token);
 
-    this.http.post(url, this.animal, { headers }).subscribe(res => {
+    this.http.post(url, this.animal, { headers }).subscribe((res) => {
       console.log(res);
-      console.log(this.animal)
+      console.log(this.animal);
       this.redirectToVacas();
     });
   }
@@ -76,5 +79,4 @@ export class CrearVacaPage implements OnInit {
   toggleCalendar() {
     this.showCalendar = !this.showCalendar;
   }
-  
 }

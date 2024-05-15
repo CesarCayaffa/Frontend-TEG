@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-actualizar-vaca',
@@ -27,7 +28,8 @@ export class ActualizarVacaPage implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

@@ -5,14 +5,24 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ThemeService {
-  private darkTheme = new BehaviorSubject<boolean>(false);
-  isDarkTheme = this.darkTheme.asObservable();
+  private darkMode = new BehaviorSubject<boolean>(false);
 
-  constructor() { 
-    this.setDarkMode(false);
-   }
+  constructor() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    this.setDarkMode(darkMode);
+  }
 
-  setDarkMode(isDarkTheme: boolean) {
-    this.darkTheme.next(isDarkTheme);
+  setDarkMode(enable: boolean) {
+    this.darkMode.next(enable);
+    localStorage.setItem('darkMode', enable ? 'true' : 'false');
+    if (enable) {
+      document.body.setAttribute('color-theme', 'dark');
+    } else {
+      document.body.setAttribute('color-theme', 'light');
+    }
+  }
+
+  isDarkMode() {
+    return this.darkMode.asObservable();
   }
 }

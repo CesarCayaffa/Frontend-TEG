@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-update-palpacion',
@@ -31,7 +32,8 @@ export class UpdatePalpacionPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private themeService: ThemeService
   ) {}
 
   animalId: string = '';

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 // import { Observable } from 'rxjs';
+import { ThemeService } from '../../../services/theme.service';  
 
 @Component({
   selector: 'app-info-palpacion',
@@ -17,7 +18,8 @@ export class InfoPalpacionPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-info-parto',
@@ -19,7 +20,8 @@ export class InfoPartoPage implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

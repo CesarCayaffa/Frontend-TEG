@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { RefresherEventDetail } from '@ionic/core';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-lista-vacas',
@@ -21,7 +22,8 @@ export class ListaVacasPage implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

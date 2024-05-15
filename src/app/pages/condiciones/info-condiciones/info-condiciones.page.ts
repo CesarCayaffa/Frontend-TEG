@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-info-condiciones',
@@ -217,6 +218,7 @@ export class InfoCondicionesPage implements OnInit {
   }
 
   constructor(
+    private themeService: ThemeService,
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router

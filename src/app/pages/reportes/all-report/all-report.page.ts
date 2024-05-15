@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-all-report',
@@ -25,7 +26,11 @@ export class AllReportPage implements OnInit {
   reportes: any[] = [];
   isLoading = true;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private themeService: ThemeService
+  ) {
     if (this.isLoading === true) {
       this.intervalId = setInterval(() => {
         this.progress += 0.01;
@@ -296,16 +301,25 @@ export class AllReportPage implements OnInit {
 
     //Cuantas veces esta Preñada , Aborto y Vacia un animal
     this.dataReportPalpacion.forEach((element) => {
-      const countPreñada = this.dataReportPalpacion.filter((palpacion) => {  
-        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Preñada';
+      const countPreñada = this.dataReportPalpacion.filter((palpacion) => {
+        return (
+          palpacion.nombre === element.nombre &&
+          palpacion.diagnostico === 'Preñada'
+        );
       }).length;
 
       const countAborto = this.dataReportPalpacion.filter((palpacion) => {
-        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Aborto';
+        return (
+          palpacion.nombre === element.nombre &&
+          palpacion.diagnostico === 'Aborto'
+        );
       }).length;
 
       const countVacia = this.dataReportPalpacion.filter((palpacion) => {
-        return palpacion.nombre === element.nombre && palpacion.diagnostico === 'Vacia';
+        return (
+          palpacion.nombre === element.nombre &&
+          palpacion.diagnostico === 'Vacia'
+        );
       }).length;
 
       element.countPrenada = countPreñada;
@@ -314,13 +328,11 @@ export class AllReportPage implements OnInit {
     });
 
     //Eliminar los duplicados
-    this.dataReportPalpacion = this.dataReportPalpacion.filter((palpacion, index, self) =>
-      index === self.findIndex((t) => (
-        t.nombre === palpacion.nombre
-      ))
+    this.dataReportPalpacion = this.dataReportPalpacion.filter(
+      (palpacion, index, self) =>
+        index === self.findIndex((t) => t.nombre === palpacion.nombre)
     );
 
-    
     console.log(this.dataReportPalpacion);
   }
 
