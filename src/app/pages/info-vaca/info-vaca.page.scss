@@ -1,88 +1,86 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-  }
-  
-  ion-header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  }
-    
-  ion-title {
-    font-weight: bold;
-  }
-  
-  ion-list {
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 550px;
-  }
-  
-  ion-list-header {
-    color: #333333;
-    font-weight: bold;
-  }
-  
-  ion-item {
-    border-bottom: 1px solid #dddddd;
-  }
-  
-  ion-button {
-    background-color: #007bff;
-    color: #ffffff;
-    margin: 10px;
-    border-radius: 10px;
-  }
+  font-family: Arial, sans-serif;
+}
 
-  ion-grid {
-    display: flex;
-    overflow-x: auto;
-  }
-  
-  ion-row {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  ion-col {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ddd;
-    min-width: 150px;
-    padding: 10px;
-    height: 60px;
-    max-height: 100px;
-  }
+ion-header {
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
 
-  div {
-    width: auto;
-    height: 50px;
-    padding-right: 20px;
-  }
+ion-title {
+  font-weight: bold;
+}
 
-  div img {
-    width: auto;
-    height: 25px;
-  }
+ion-list {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 550px;
+}
 
-  .leve {
-    background-color: #FFD700;
+ion-list-header {
+  // color: var(--ion-color-primary);
+  opacity: 0.6;
+  font-weight: bold;
+}
 
-  }
-  
-  .moderada {
-    background-color: rgb(255, 157, 0);
-  }
-  
-  .grave {
-    background-color: red;
-  }
+ion-item {
+  border-bottom: 1px solid #dddddd;
+}
 
-  ion-chip {
-    color: rgb(255, 255, 255);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  }
+ion-button {
+  background-color: #007bff;
+  color: #ffffff;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+ion-grid {
+  display: flex;
+  overflow-x: auto;
+}
+
+ion-row {
+  display: flex;
+  flex-direction: row;
+}
+
+ion-col {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  min-width: 150px;
+  padding: 10px;
+  height: 60px;
+  max-height: 100px;
+}
+
+div {
+  width: auto;
+  height: 50px;
+  padding-right: 20px;
+}
+
+div img {
+  width: auto;
+  height: 25px;
+}
+
+.leve {
+  background-color: #ffd700;
+}
+
+.moderada {
+  background-color: rgb(255, 157, 0);
+}
+
+.grave {
+  background-color: red;
+}
+
+ion-chip {
+  color: rgb(255, 255, 255);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
