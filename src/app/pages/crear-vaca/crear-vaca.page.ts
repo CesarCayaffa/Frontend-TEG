@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-crear-vaca',
@@ -32,13 +33,22 @@ export class CrearVacaPage implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
     this.getAnimals().subscribe((data) => {
       this.animals = data;
     });
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   getAnimals(): Observable<any> {
@@ -64,11 +74,19 @@ export class CrearVacaPage implements OnInit {
 
     const headers = new HttpHeaders().set('auth-token', token);
 
-    this.http.post(url, this.animal, { headers }).subscribe((res) => {
-      console.log(res);
-      console.log(this.animal);
-      this.redirectToVacas();
-    });
+    if(!this.animal.nombre || !this.animal.numero || !this.animal.raza || !this.animal.sexo || !this.animal.fechaNacimiento) {
+      this.presentToast('Por favor, complete todos los campos requeridos.');
+      return;
+    } else{
+      this.http.post(url, this.animal, { headers }).subscribe((res) => {
+        console.log(res);
+        console.log(this.animal);
+        this.redirectToVacas();
+      });
+
+      this.presentToast('Animal creado exitosamente.');
+    }
+
   }
 
   redirectToVacas() {
