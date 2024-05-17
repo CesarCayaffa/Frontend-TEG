@@ -7,13 +7,14 @@ import { AlertController } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component';
 import { ThemeService } from '../../services/theme.service';
+import { ViewDidEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-info-vaca',
   templateUrl: './info-vaca.page.html',
   styleUrls: ['./info-vaca.page.scss'],
 })
-export class InfoVacaPage implements OnInit {
+export class InfoVacaPage implements OnInit, ViewDidEnter {
   id: any;
   animal: any;
   private baseUrl = 'https://backend-teg.up.railway.app/animals';
@@ -33,6 +34,14 @@ export class InfoVacaPage implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+
+  }
+
+  ionViewDidEnter() {
+    this.refreshAnimalData();
+  }
+
+  refreshAnimalData() {
     this.getAnimalById(this.id).subscribe((animal) => {
       this.animal = animal;
       this.animal.hijos.forEach((id: any) => {
@@ -49,15 +58,8 @@ export class InfoVacaPage implements OnInit {
   }
 
   doRefresh(event: CustomEvent<RefresherEventDetail>) {
-    this.getAnimalById(this.id).subscribe((animal) => {
-      this.animal = animal;
-      this.animal.hijos.forEach((id: any) => {
-        this.getAnimalById(id).subscribe((hijo) => {
-          this.animal.hijos[this.animal.hijos.indexOf(id)] = hijo;
-        });
-      });
-      event.detail.complete();
-    });
+    this.refreshAnimalData();
+    event.detail.complete();
   }
 
   redirectList() {
