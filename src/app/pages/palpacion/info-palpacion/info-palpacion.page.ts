@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-// import { Observable } from 'rxjs';
 import { ThemeService } from '../../../services/theme.service';  
+import { ViewDidEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-info-palpacion',
   templateUrl: './info-palpacion.page.html',
   styleUrls: ['./info-palpacion.page.scss'],
 })
-export class InfoPalpacionPage implements OnInit {
+export class InfoPalpacionPage implements OnInit, ViewDidEnter {
   private baseUrl = 'https://backend-teg.up.railway.app/animals';
   animalId: string = '';
   animal: any;
@@ -26,10 +26,13 @@ export class InfoPalpacionPage implements OnInit {
     const id = this.route.snapshot.paramMap.get('animalId');
     if (id) {
       this.animalId = id;
-      this.http.get(`${this.baseUrl}/${this.animalId}`).subscribe((data) => {
-        this.animal = data;
-      });
     }
+  }
+
+  ionViewDidEnter() {
+    this.http.get(`${this.baseUrl}/${this.animalId}`).subscribe((data) => {
+      this.animal = data;
+    });
   }
 
   // getAnimalById(id: string): Observable<any> {
