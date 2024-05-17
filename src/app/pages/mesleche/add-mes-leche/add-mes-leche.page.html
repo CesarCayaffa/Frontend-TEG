@@ -18,7 +18,7 @@
     <ion-item>
       <ion-label> Selecciona el Parto </ion-label>
       
-      <ion-select [(ngModel)]="lecheMes.idComiParto">
+      <ion-select [(ngModel)]="lecheMes.idComiParto" required>
         <ion-select-option
           *ngFor="let comiParto of comiPartos"
           [value]="comiParto._id"

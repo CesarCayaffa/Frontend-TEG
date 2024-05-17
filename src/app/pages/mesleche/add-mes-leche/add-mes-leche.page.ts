@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ThemeService } from '../../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-mes-leche',
@@ -26,7 +27,8 @@ export class AddMesLechePage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {
     for (let i = 0; i < 12; i++) {
       this.lecheMes.lecheXmes.push({ mes: '', cantidadLeche: '' });
@@ -38,12 +40,24 @@ export class AddMesLechePage implements OnInit {
     //hacer un get para traer la info de la vaca
     this.getVaca();
   }
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
+  }
 
   addLecheMes() {
-    const url = `${this.baseUrl}/addLecheMes/${this.id}`;
-    this.http.patch(url, this.lecheMes).subscribe(() => {
-      this.redirecInfoVaca();
-    });
+
+    if (!this.lecheMes.fechaSecado || !this.lecheMes.idComiParto) {
+      this.presentToast('Por favor complete todos los campos requeridos.');
+    } else {
+      const url = `${this.baseUrl}/addLecheMes/${this.id}`;
+      this.http.patch(url, this.lecheMes).subscribe(() => {
+        this.redirecInfoVaca();
+      });
+    }
   }
 
   getVaca() {
