@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-mes-leche',
@@ -31,7 +32,8 @@ export class UpdateMesLechePage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
   animalId: string = '';
 
@@ -39,6 +41,13 @@ export class UpdateMesLechePage implements OnInit {
     this.lecheMesId = this.route.snapshot.paramMap.get('lecheMesId') ?? '';
     this.animalId = this.route.snapshot.paramMap.get('animalId') ?? '';
     this.getLecheMes();
+  }
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   getLecheMes() {
@@ -55,6 +64,7 @@ export class UpdateMesLechePage implements OnInit {
     this.http.patch(url, this.lecheMes).subscribe(() => {
       this.redirectInfoVaca();
     });
+    this.presentToast('Actualizado correctamente');
   }
 
   redirectInfoVaca() {
