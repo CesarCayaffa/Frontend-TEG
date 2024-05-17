@@ -15,8 +15,14 @@
     ></ion-searchbar>
 
     <ion-buttons slot="end">
-      <ion-button (click)="toggleSearchBar()">
+      <ion-button *ngIf="!showSearchBar" (click)="toggleSearchBar()">
         <ion-icon name="search"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="showSearchBar" (click)="toggleSearchBar()">
+        <ion-icon
+        slot="icon-only"
+        name="close"></ion-icon>
       </ion-button>
 
       <ion-button
@@ -38,9 +44,11 @@
 
   <app-menu></app-menu>
 
-  <ion-list *ngIf="!isLoading 
+  <ion-list
+    *ngIf="!isLoading 
   && filteredAnimals.length > 0
-  ">
+  "
+  >
     <ion-item *ngFor="let animal of filteredAnimals">
       <a [routerLink]="['/info-vaca', animal.id]">
         <div class="avatar">
@@ -87,9 +95,7 @@
 
   <ion-list *ngIf="!isLoading && filteredAnimals.length === 0">
     <ion-item>
-      <ion-label>
-          No se encontraron animales.
-      </ion-label>
+      <ion-label> No se encontraron animales. </ion-label>
     </ion-item>
   </ion-list>
 

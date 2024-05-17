@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="regresar()"></ion-back-button>
+      <ion-back-button 
+      *ngIf="!showSearchBar"
+      (click)="regresar()"></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="!showSearchBar">Agregar Condiciones</ion-title>
 
@@ -12,9 +14,19 @@
       placeholder="Buscar por nombre"
     ></ion-searchbar>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleSearchBar()">
+      <ion-button
+      *ngIf="!showSearchBar"
+      (click)="toggleSearchBar()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
+
+    
+      <ion-button 
+      *ngIf="showSearchBar"
+      (click)="toggleSearchBar()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
