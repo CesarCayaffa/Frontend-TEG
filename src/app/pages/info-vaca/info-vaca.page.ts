@@ -51,6 +51,11 @@ export class InfoVacaPage implements OnInit {
   doRefresh(event: CustomEvent<RefresherEventDetail>) {
     this.getAnimalById(this.id).subscribe((animal) => {
       this.animal = animal;
+      this.animal.hijos.forEach((id: any) => {
+        this.getAnimalById(id).subscribe((hijo) => {
+          this.animal.hijos[this.animal.hijos.indexOf(id)] = hijo;
+        });
+      });
       event.detail.complete();
     });
   }
