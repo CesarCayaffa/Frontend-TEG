@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 import { RefresherEventDetail } from '@ionic/core';
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { ThemeService } from '../../services/theme.service';
+import { ViewDidEnter } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista-vacas',
   templateUrl: './lista-vacas.page.html',
   styleUrls: ['./lista-vacas.page.scss'],
 })
-export class ListaVacasPage implements OnInit {
+export class ListaVacasPage implements OnInit, ViewDidEnter{
   animals: any[] = [];
   filteredAnimals: any[] = [];
   searchTerm = '';
@@ -29,6 +29,26 @@ export class ListaVacasPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('ngOnInit');
+    // this.getAnimals().subscribe((data) => {
+    //   this.animals = data.map((animal: any) => ({
+    //     nombre: animal.nombre,
+    //     numero: animal.numero,
+    //     sexo: animal.sexo,
+    //     fechaNacimiento: animal.fechaNacimiento,
+    //     id: animal._id,
+    //     esBecerro: animal.esBecerro,
+    //     raza: animal.raza,
+    //     years: animal.edad.years,
+    //     puntuacion: animal.puntuacion,
+  
+    //   }));
+    //   this.filteredAnimals = this.animals;
+    //   this.isLoading = false;
+    // });
+  }
+
+  ionViewDidEnter() {
     this.getAnimals().subscribe((data) => {
       this.animals = data.map((animal: any) => ({
         nombre: animal.nombre,
@@ -40,7 +60,6 @@ export class ListaVacasPage implements OnInit {
         raza: animal.raza,
         years: animal.edad.years,
         puntuacion: animal.puntuacion,
-  
       }));
       this.filteredAnimals = this.animals;
       this.isLoading = false;
