@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ThemeService } from '../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-actualizar-vaca',
@@ -29,7 +30,8 @@ export class ActualizarVacaPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -38,7 +40,16 @@ export class ActualizarVacaPage implements OnInit {
       this.getAnimal(id);
     } else {
       console.error('id es null');
+      this.presentToast('Error al cargar la vaca.');
     }
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   getAnimal(id: string) {
@@ -54,6 +65,7 @@ export class ActualizarVacaPage implements OnInit {
     this.http.patch(url, this.animal).subscribe(() => {
       this.router.navigate(['/info-vaca', this.animal.id]);
     });
+    this.presentToast('Animal actualizado exitosamente.');
   }
 
   redirectToInfoVaca() {
