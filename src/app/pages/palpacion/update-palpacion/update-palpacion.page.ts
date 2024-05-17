@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-palpacion',
@@ -33,7 +34,8 @@ export class UpdatePalpacionPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   animalId: string = '';
@@ -43,6 +45,15 @@ export class UpdatePalpacionPage implements OnInit {
     this.animalId = this.route.snapshot.paramMap.get('animalId') ?? '';
     this.getPalpacion();
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
   getPalpacion() {
     const url = `${this.baseUrl}/palpacion/${this.animalId}/${this.palpacionId}`;
     this.http.get(url).subscribe((palpacion: any) => {
@@ -57,6 +68,7 @@ export class UpdatePalpacionPage implements OnInit {
       this.redirectInfoVaca();
     });
     this.getAnimalById(this.animalId);
+    this.presentToast('Actualizado correctamente');
   }
 
   redirectInfoVaca() {

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-palpacion',
@@ -27,19 +28,31 @@ export class AddPalpacionPage implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
-  addPalpacion() {
-    const url = `${this.baseUrl}/addPalpacion/${this.id}`;
-    this.http.patch(url, this.palpacion).subscribe(() => {
-      this.redirectInfoVaca();
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
     });
-    this.getAnimalById(this.id)
+    toast.present();
+  }
+
+  addPalpacion() {
+    if(!this.palpacion.fechaCelo || !this.palpacion.fechaServicio || !this.palpacion.toro || !this.palpacion.fechaPalpacion1 || !this.palpacion.diagnostico1 || !this.palpacion.fechaPalpacion2 || !this.palpacion.diagnostico2 || !this.palpacion.observaciones){
+      this.presentToast('Por favor complete todos los campos requeridos.');
+    } else {
+      const url = `${this.baseUrl}/addPalpacion/${this.id}`;
+      this.http.patch(url, this.palpacion).subscribe(() => {
+        this.redirectInfoVaca();
+      });
+    }
   }
 
  getAnimalById(id: string): Observable<any> {
