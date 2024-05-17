@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../../services/theme.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-parto',
@@ -33,7 +34,8 @@ export class UpdatePartoPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   animalId: string = '';
@@ -43,6 +45,15 @@ export class UpdatePartoPage implements OnInit {
     this.animalId = this.route.snapshot.paramMap.get('animalId') ?? '';
     this.getParto();
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
   getParto() {
     const url = `${this.baseUrl}/parto/${this.animalId}/${this.partoId}`;
     this.http.get(url).subscribe((parto: any) => {
@@ -56,6 +67,7 @@ export class UpdatePartoPage implements OnInit {
     this.http.patch(url, this.comiParto).subscribe(() => {
       this.redirectInfoVaca();
     });
+    this.presentToast('Actualizado correctamente');
   }
 
   redirectInfoVaca() {
