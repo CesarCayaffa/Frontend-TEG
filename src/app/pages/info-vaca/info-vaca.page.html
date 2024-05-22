@@ -163,6 +163,9 @@
       <ion-fab-button color="danger" (click)="deleteAnimal(animal.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-fab-button>
+      <ion-fab-button color="warning" (click)="changeStatus(animal._id)">
+        <ion-icon name="sync"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

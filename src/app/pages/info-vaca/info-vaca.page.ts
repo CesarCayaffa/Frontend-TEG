@@ -34,7 +34,6 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-
   }
 
   ionViewDidEnter() {
@@ -149,14 +148,14 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
             handler: () => {
               const url = `${this.baseUrl}/updateCondicion/${this.id}/${id}`;
               const data = {
-                curada: true
+                curada: true,
               };
               this.http.patch(url, data).subscribe(() => {
                 this.getAnimalById(this.id).subscribe((animal) => {
                   this.animal = animal;
                 });
               });
-            }
+            },
           },
           {
             text: 'Eliminar',
@@ -174,5 +173,63 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
       .then((alert) => {
         alert.present();
       });
+  }
+
+  async changeStatus(id: any) {
+    const alert = await this.alertController.create({
+      header: 'Cambiar estado',
+      inputs: [
+        {
+          name: 'Normal',
+          type: 'radio',
+          label: 'Normal',
+          value: 'Normal',
+          checked: this.animal.estado === 'Normal',
+        },
+        {
+          name: 'Vendida',
+          type: 'radio',
+          label: 'Vendida',
+          value: 'Vendida',
+          checked: this.animal.estado === 'Vendida',
+        },
+        {
+          name: 'Muerta',
+          type: 'radio',
+          label: 'Muerta',
+          value: 'Muerta',
+          checked: this.animal.estado === 'Muerta',
+        },
+        {
+          name: 'Desaparecida',
+          type: 'radio',
+          label: 'Desaparecida',
+          value: 'Desaparecida',
+          checked: this.animal.estado === 'Desaparecida',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Aceptar',
+          handler: (estado) => {
+            const url = `https://backend-teg.up.railway.app/animals/${this.id}`;
+            const data = {
+              estado: estado,
+            };
+            this.http.patch(url, data).subscribe(() => {
+              this.getAnimalById(this.id).subscribe((animal) => {
+                this.animal = animal;
+              });
+            });
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
