@@ -251,4 +251,8 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
       toast.present();
     }
   }
+
+  tieneHijos(): boolean {
+    return this.animal.hijos.length === 0 || this.animal.hijos.every((hijo: object) => !hijo);
+  }
 }

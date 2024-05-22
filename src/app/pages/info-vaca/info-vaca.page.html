@@ -117,16 +117,18 @@
   <!-- Hijos -->
   <ion-list>
     <ion-list-header>Hijos:</ion-list-header>
-    <ion-item *ngFor="let hijo of animal.hijos">
-      <ion-label>
-        Nombre:
-        <a [routerLink]="['/info-vaca', hijo._id]">{{ hijo.nombre }}</a>
-        - No.
-        <a [routerLink]="['/info-vaca', hijo._id]">{{ hijo.numero }}</a>
-        <ion-icon style="padding-left: 3px;" name="search-outline"></ion-icon>
-      </ion-label>
-    </ion-item>
-    <ion-item *ngIf="animal.hijos.length === 0">
+    <ng-container *ngFor="let hijo of animal.hijos">
+      <ion-item *ngIf="hijo">
+        <ion-label>
+          Nombre:
+          <a [routerLink]="['/info-vaca', hijo._id]">{{ hijo.nombre }}</a>
+          - No.
+          <a [routerLink]="['/info-vaca', hijo._id]">{{ hijo.numero }}</a>
+          <ion-icon style="padding-left: 3px;" name="search-outline"></ion-icon>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+    <ion-item *ngIf="tieneHijos()">
       <ion-label>Este animal no tiene hijos.</ion-label>
     </ion-item>
   </ion-list>
