@@ -2,7 +2,7 @@ ion-segment{
 
     white-space: nowrap;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 0;
     margin: 0;
@@ -12,16 +12,10 @@ ion-segment{
 ion-segment-button{
     padding: 0;
     margin: 0;
-
-    min-width: 33%;
-    // white-space: nowrap;
+    min-width: auto; 
     text-align: center;
-
-    overflow: auto;
-
     transition: background-color 0.3s, color 0.3s;
 }
-
 .encabezado{
 
     font-weight: bold;
