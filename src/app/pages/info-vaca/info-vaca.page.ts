@@ -8,6 +8,7 @@ import { PopoverController } from '@ionic/angular';
 import { PopOverInfoComponent } from '../../components/pop-over-info/pop-over-info.component';
 import { ThemeService } from '../../services/theme.service';
 import { ViewDidEnter } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-info-vaca',
@@ -29,7 +30,8 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
     private router: Router,
     private alertController: AlertController,
     private popoverController: PopoverController,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -231,5 +233,22 @@ export class InfoVacaPage implements OnInit, ViewDidEnter {
     });
 
     await alert.present();
+  }
+
+  async navegarSiExiste(idAnimal: string) {
+
+    const url = `https://backend-teg.up.railway.app/animals/${idAnimal}`;
+    const animal = await this.http.get(url).toPromise().catch(() => null);
+    const animalExiste = animal !== null;
+
+    if (animalExiste) {
+      this.router.navigate(['/info-vaca', idAnimal]);
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Animal no encontrado o fue eliminado.',
+        duration: 2500
+      });
+      toast.present();
+    }
   }
 }

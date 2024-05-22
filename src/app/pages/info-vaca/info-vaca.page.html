@@ -71,37 +71,39 @@
     <ion-item>
       <ion-label>
         Nombre del padre:
-        <ng-container *ngIf="animal.idPadre; else noLinkPadre">
-          <a [routerLink]="['/info-vaca', animal.idPadre]"
-            >{{ animal.nombrePadre }}</a
-          >
+        <ng-container *ngIf="animal.idPadre && animal.nombrePadre; else noPadre">
+          <a (click)="navegarSiExiste(animal.idPadre)">{{ animal.nombrePadre }}</a>
           - No.
-          <a [routerLink]="['/info-vaca', animal.idPadre]"
-            >{{ animal.numeroPadre }}</a
-          >
+          <a (click)="navegarSiExiste(animal.idPadre)">{{ animal.numeroPadre }}</a>
           <ion-icon style="padding-left: 3px;" name="search-outline"></ion-icon>
         </ng-container>
-        <ng-template #noLinkPadre
-          >{{ animal.nombrePadre }} - No. {{ animal.numeroPadre }}</ng-template
-        >
+        <ng-template #noPadre>
+          <ng-container *ngIf="animal.nombrePadre; else noLinkPadre">
+            {{ animal.nombrePadre }} - No. {{ animal.numeroPadre }}
+          </ng-container>
+          <ng-template #noLinkPadre>No definido</ng-template>
+        </ng-template>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         Nombre de la madre:
         <ng-container *ngIf="animal.idMadre; else noLinkMadre">
-          <a [routerLink]="['/info-vaca', animal.idMadre]"
-            >{{ animal.nombreMadre }}</a
-          >
+          <a 
+          (click)="navegarSiExiste(animal.idMadre)"
+          >{{ animal.nombreMadre }}</a>
           - No.
-          <a [routerLink]="['/info-vaca', animal.idMadre]"
-            >{{ animal.numeroMadre }}</a
-          >
+          <a 
+          (click)="navegarSiExiste(animal.idMadre)"
+          >{{ animal.numeroMadre }}</a>
           <ion-icon style="padding-left: 3px;" name="search-outline"></ion-icon>
         </ng-container>
-        <ng-template #noLinkMadre
-          >{{ animal.nombreMadre }} - No. {{ animal.numeroMadre }}</ng-template
-        >
+        <ng-template #noLinkMadre>
+          <ng-container *ngIf="animal.nombreMadre; else noLinkMadre">
+            {{ animal.nombreMadre }} - No. {{ animal.numeroMadre }}
+          </ng-container>
+          <ng-template #noLinkMadre>No definido</ng-template>
+        </ng-template>
       </ion-label>
     </ion-item>
 
