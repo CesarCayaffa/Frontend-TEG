@@ -1,13 +1,72 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>calculadora</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Calculadora Genética</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">calculadora</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-menu></app-menu>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Calculadora Genética</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Madre:</ion-label>
+        <ion-select
+          placeholder="Selecciona una vaca"
+          [(ngModel)]="selectedMother"
+        >
+          <ng-container *ngFor="let animal of animals">
+            <ion-select-option
+              *ngIf="animal.sexo === 'Femenino'"
+              [value]="animal._id"
+            >
+              {{animal.nombre}} - No. {{animal.numero}}
+            </ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Padre:</ion-label>
+        <ion-select
+          placeholder="Selecciona un toro"
+          [(ngModel)]="selectedFather"
+        >
+          <ng-container *ngFor="let animal of animals">
+            <ion-select-option
+              *ngIf="animal.sexo === 'Masculino'"
+              [value]="animal._id"
+            >
+              {{animal.nombre}} - No. {{animal.numero}}
+            </ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-button (click)="calculate()">Calcular</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card 
+  *ngIf="newAnimal"
+  >
+    <ion-card-header>
+      <ion-card-title>Resultado</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item> Raza: {{newAnimal.raza}} </ion-item>
+
+      <ion-item> Puntuación: {{newAnimal.puntuacion}} </ion-item>
+
+      <ion-item> Posibles Condiciones: {{getConditionsString()}}</ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

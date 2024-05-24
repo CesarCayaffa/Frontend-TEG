@@ -8,12 +8,15 @@ import { CalculadoraPageRoutingModule } from './calculadora-routing.module';
 
 import { CalculadoraPage } from './calculadora.page';
 
+import { MenuModule } from '../../components/menu/menu.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalculadoraPageRoutingModule
+    CalculadoraPageRoutingModule,
+    MenuModule
   ],
   declarations: [CalculadoraPage]
 })
