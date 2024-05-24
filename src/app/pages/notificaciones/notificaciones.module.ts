@@ -8,12 +8,15 @@ import { NotificacionesPageRoutingModule } from './notificaciones-routing.module
 
 import { NotificacionesPage } from './notificaciones.page';
 
+import { MenuModule } from '../../components/menu/menu.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NotificacionesPageRoutingModule
+    NotificacionesPageRoutingModule,
+    MenuModule
   ],
   declarations: [NotificacionesPage]
 })

@@ -13,6 +13,7 @@ export class NotificacionesPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('NotificacionesPage');
   }
 
 }
