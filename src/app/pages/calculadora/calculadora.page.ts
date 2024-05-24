@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-calculadora',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculadoraPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit() {
   }
