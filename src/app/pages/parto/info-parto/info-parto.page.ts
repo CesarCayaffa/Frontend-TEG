@@ -32,6 +32,15 @@ export class InfoPartoPage implements OnInit, ViewDidEnter {
   ionViewDidEnter() {
     this.http.get(`${this.baseUrl}/${this.animalId}`).subscribe((data) => {
       this.animal = data;
+
+
+      if (this.animal.comiParto) {
+        this.animal.comiParto.sort((a: any, b: any) => {
+          const dateA = new Date(a.fechaParto);
+          const dateB = new Date(b.fechaParto);
+          return dateA.getTime() - dateB.getTime();
+        });
+      }
     });
   }
 
