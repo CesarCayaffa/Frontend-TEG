@@ -79,6 +79,14 @@ const routes: Routes = [
     path: 'all-report',
     loadChildren: () => import('./pages/reportes/all-report/all-report.module').then( m => m.AllReportPageModule)
   },
+  {
+    path: 'calculadora',
+    loadChildren: () => import('./pages/calculadora/calculadora.module').then( m => m.CalculadoraPageModule)
+  },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./pages/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
 ];
 
 @NgModule({
