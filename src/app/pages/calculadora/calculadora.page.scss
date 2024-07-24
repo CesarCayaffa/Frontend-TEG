@@ -1,0 +1,44 @@
+ion-header {
+    color: #495057;
+  }
+
+  ion-card {
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-card-title {
+    font-size: 20px;
+  }
+  
+  ion-item {
+    --background: #d4d4d4;
+    --color: #495057;
+    // border-bottom: 1px solid #e9ecef;
+  }
+  
+  
+  ion-select {
+    --placeholder-color: #6c757d;
+    --color: #495057;
+  }
+  
+  ion-button {
+    margin: 20px;
+    --color: #ffffff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  
+  /* Estilos adicionales para el contenido del ion-card si es necesario */
+  ion-card-content {
+    padding: 15px;
+  }
+  
+  /* Ajustes para el título de la aplicación */
+  ion-title {
+    font-weight: bold;
+  }
+  
