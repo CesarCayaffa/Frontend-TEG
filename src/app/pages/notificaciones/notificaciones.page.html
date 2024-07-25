@@ -10,24 +10,20 @@
 <ion-content [fullscreen]="true">
   <app-menu></app-menu>
 
-  <!-- <ion-card>
-    <ion-card-header>
-      <ion-card-title>Notificaciones</ion-card-title>
-    </ion-card-header>
+  <ion-card>
+
 
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let notification of notifications">
           <ion-label>
-            {{notification.title}}
+            <h2>{{notification.message}}</h2>
+            <p>Enviado: {{notification.dateSent | date:'medium'}}</p>
           </ion-label>
-          <ion-text>
-            {{notification.description}}
-          </ion-text>
+          <ion-checkbox slot="end" [(ngModel)]="notification.read"></ion-checkbox>  
         </ion-item>
       </ion-list>
     </ion-card-content>
-  </ion-card> -->
+  </ion-card>
 
-  <h1>Proximamente...</h1>
 </ion-content>

@@ -1,0 +1,27 @@
+
+  
+  ion-card {
+    margin: 10px; /* Agrega un margen alrededor de cada tarjeta para separarlas del resto del contenido */
+  }
+  
+  ion-item {
+
+    --border-color: #6c757d; /* Cambia el color del borde de cada ítem */
+    --border-style: solid; /* Establece el estilo del borde */
+    --border-width: 1px; /* Establece el ancho del borde */
+    --border-radius: 10px; /* Redondea las esquinas del ítem */
+    margin-bottom: 8px; /* Agrega un margen en la parte inferior de cada ítem */
+  }
+  
+  ion-label {
+    --text-wrap: wrap; /* Asegura que el texto se ajuste dentro del elemento */
+  }
+  
+  ion-checkbox {
+    --background-checked: #3880ff; /* Cambia el color de fondo del checkbox cuando está marcado */
+    --border-color-checked: #3880ff; /* Cambia el color del borde del checkbox cuando está marcado */
+  }
+
+  ion-title {
+    font-weight: bold;
+  }
