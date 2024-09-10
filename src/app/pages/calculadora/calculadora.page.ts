@@ -17,6 +17,8 @@ export class CalculadoraPage implements OnInit {
 
   newAnimal: any;
 
+  recommendedBulls: any[] = [];
+
   constructor(private themeService: ThemeService, private http: HttpClient) {}
 
   ngOnInit() {
@@ -49,8 +51,11 @@ export class CalculadoraPage implements OnInit {
 
     // Extrae la raza, las condiciones y la puntuación
     let raza;
-    if (mother.raza === father.raza) {
-      raza = mother.raza;
+    const motherRaza = mother.raza.trim().toLowerCase();
+    const fatherRaza = father.raza.trim().toLowerCase();
+    
+    if (motherRaza === fatherRaza) {
+      raza = `${mother.raza} `; // Raza pura
     } else {
       raza = `Cruzada (${mother.raza} x ${father.raza})`; // Raza cruzada
     }
@@ -74,12 +79,45 @@ export class CalculadoraPage implements OnInit {
     return newAnimal;
   }
 
+getRecommendedBulls(idMother: string): any[] {
+  const mother = this.animals.find((animal) => animal._id === idMother);
+
+  if (!mother) {
+    throw new Error('Mother not found');
+  }
+
+
+  // Filtrar solo los toros (machos)
+  const bulls = this.animals.filter((animal) => animal.sexo === 'Masculino');
+
+
+  // Ordenar los toros por puntuación en orden descendente
+  const sortedBulls = bulls.sort((a, b) => b.puntuacion - a.puntuacion);
+
+
+  // Seleccionar los 5 toros con la puntuación más alta
+  const recommendedBulls = sortedBulls.slice(0, 5);
+
+
+  return recommendedBulls;
+}
+
   calculate() {
     this.newAnimal = this.calculateCross(
       this.selectedMother,
       this.selectedFather
     );
-  }
+    this.recommendedBulls = this.getRecommendedBulls(this.selectedMother);
+    console.log('New Animal:', this.newAnimal);
+    console.log('Recommended Bulls:', this.recommendedBulls);
+    }
+
+    selectBullAndCalculate(bull: any): void {
+      // Actualiza el ion-select del padre con el nuevo toro seleccionado
+      this.selectedFather = bull._id;
+      // Llama a la función de cálculo existente
+      this.calculate();
+    }
 
   getConditionsString(): string {
     if (this.newAnimal && this.newAnimal.condiciones) {
