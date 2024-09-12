@@ -11,10 +11,8 @@
   <app-menu></app-menu>
 
   <ion-card>
-
-
     <ion-card-content>
-      <ion-list>
+      <ion-list *ngIf="notifications.length > 0; else noNotifications">
         <ion-item *ngFor="let notification of notifications">
           <ion-label>
             <h2>{{notification.message}}</h2>
@@ -23,6 +21,11 @@
           <ion-checkbox slot="end" [(ngModel)]="notification.read"></ion-checkbox>  
         </ion-item>
       </ion-list>
+      <ng-template #noNotifications>
+        <ion-item>
+          <ion-label>No hay notificaciones</ion-label>
+        </ion-item>
+      </ng-template>
     </ion-card-content>
   </ion-card>
 
