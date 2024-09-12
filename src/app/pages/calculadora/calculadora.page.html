@@ -24,7 +24,7 @@
         >
           <ng-container *ngFor="let animal of animals">
             <ion-select-option
-              *ngIf="animal.sexo === 'Femenino'"
+              *ngIf="animal.sexo === 'Femenino' && animal.esBecerro === false"
               [value]="animal._id"
             >
               {{animal.nombre}} - No. {{animal.numero}}
@@ -41,7 +41,7 @@
         >
           <ng-container *ngFor="let animal of animals">
             <ion-select-option
-              *ngIf="animal.sexo === 'Masculino'"
+              *ngIf="animal.sexo === 'Masculino' && animal.esBecerro === false"
               [value]="animal._id"
             >
               {{animal.nombre}} - No. {{animal.numero}}
@@ -64,7 +64,7 @@
     <ion-card-content>
       <ion-item> Raza: {{newAnimal.raza}} </ion-item>
 
-      <ion-item> Puntuación: {{newAnimal.puntuacion}} </ion-item>
+      <ion-item> Puntuación: {{newAnimal.puntuacion | number:'1.2-2'}} </ion-item>
 
       <ion-item *ngIf="getConditionsString()"> Posibles Condiciones: {{getConditionsString()}}</ion-item>
     </ion-card-content>

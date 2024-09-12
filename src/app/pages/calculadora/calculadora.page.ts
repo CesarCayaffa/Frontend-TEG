@@ -87,9 +87,9 @@ getRecommendedBulls(idMother: string): any[] {
   }
 
 
-  // Filtrar solo los toros (machos)
-  const bulls = this.animals.filter((animal) => animal.sexo === 'Masculino');
-
+    // Filtrar solo los toros (machos) que no sean becerros
+    const bulls = this.animals.filter((animal) => animal.sexo === 'Masculino' && animal.esBecerro === false);
+    console.log('Bulls:', bulls);
 
   // Ordenar los toros por puntuación en orden descendente
   const sortedBulls = bulls.sort((a, b) => b.puntuacion - a.puntuacion);
